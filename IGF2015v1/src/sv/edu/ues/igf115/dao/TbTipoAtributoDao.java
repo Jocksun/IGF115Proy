@@ -18,6 +18,8 @@ public class TbTipoAtributoDao {
 	private SessionFactory sf;
 	private Session s;
 	private Transaction tx;
+	
+	
 
 	public boolean guardar(TbTipoAtributo tbTipoAtributo) {
 		try {
@@ -26,42 +28,57 @@ public class TbTipoAtributoDao {
 			finTransaccion();
 			return true;
 		} catch (Exception e) {
-			System.err.println(this + "Ocurrio un error " + e.getMessage());
+			System.err.println(this + "Ocurrio un error al guardar TbTipoAtributo " + e.getMessage());
 			return false;
 		}
 	}
+	
+	
 
-	public boolean borrar(int idCliente) {
+	public boolean borrar(String cTipoAtributo) {
 		try {
 			iniciarTransaccion();
-			TbTipoAtributo tbTipoAtributo = findByIdCliente(idCliente);
+			TbTipoAtributo tbTipoAtributo = findByIdTbTipoAtributo(cTipoAtributo);
 			s.delete(tbTipoAtributo);
 			finTransaccion();
 			return true;
 		} catch (Exception e) {
-			System.err.println(this + "Ocurrio un error " + e.getMessage());
+			System.err.println(this + "Ocurrio un error al borrar TbTipoAtributo " + e.getMessage());
 			return false;
 		}
 	}
 
-	public TbTipoAtributo findById(int idCliente) {
-		iniciarSesion();
-		TbTipoAtributo tbTipoAtributo = findByIdCliente(idCliente);
-		finSesion();
-		return tbTipoAtributo;
+	public boolean Actualizar(TbTipoAtributo tbTipoAtributo) {
+		try {
+			iniciarTransaccion();
+			s.saveOrUpdate(tbTipoAtributo);
+			finTransaccion();
+			return true;
+		} catch (Exception e) {
+			System.err.println(this + "Ocurrio un error al Actualizar TbTipoAtributo" + e.getMessage());
+			return false;
+		}
 	}
 
-	public List findByAll() {
-		iniciarSesion();
-		Query query = s.getNamedQuery("TbTipoAtributo.findByAll");
-		List lst = query.list();
-		finSesion();
-		return lst;
+
+	public List<TbTipoAtributo> findByAll() {
+		try {
+			iniciarSesion();
+			//Query query = s.getNamedQuery("TbTipoAtributo.findAll");
+			Query query = s.createQuery("Select u From TbTipoAtributo u");
+			List<TbTipoAtributo> lst =query.list();
+			finSesion();
+			return lst;
+		} catch (Exception e) {
+			System.out.println("Error TbTipoAtributoDao---findByAll "+e);
+		}
+		return null;
+		
 	}
 
-	private TbTipoAtributo findByIdCliente(int idCliente) {
-		Query query = s.getNamedQuery("Cliente.findByIdCliente");
-		query.setParameter("id", idCliente);
+	public TbTipoAtributo findByIdTbTipoAtributo(String idTipo) {
+		Query query = s.getNamedQuery("TbTipoAtributo.findByIdcTipoAtributo");
+		query.setParameter("tipoAtributo", idTipo);
 		TbTipoAtributo tbTipoAtributo = (TbTipoAtributo) query.uniqueResult();
 		return tbTipoAtributo;
 	}
