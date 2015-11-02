@@ -30,7 +30,7 @@ public class HibernateUtil {
 	/**
 	 * @return the sf
 	 */
-	public static SessionFactory getSf() {
+	public SessionFactory getSf() {
 		return sf;
 	}
 

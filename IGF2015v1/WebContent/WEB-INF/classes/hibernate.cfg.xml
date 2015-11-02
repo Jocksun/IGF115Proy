@@ -15,6 +15,7 @@
 		<property name="hibernate.show_sql">true</property>
 
 		<!-- MAPPING -->
+		<mapping class="sv.edu.ues.igf115.model.AsAtributo" />
 		<mapping class="sv.edu.ues.igf115.model.AsClase" />
 		<mapping class="sv.edu.ues.igf115.model.AsClaseInterface" />
 		<mapping class="sv.edu.ues.igf115.model.AsInterface" />

@@ -2,6 +2,7 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
+  <table-filter match-catalog="mydb" match-name="as_atributo"/>
   <table-filter match-catalog="mydb" match-name="as_clase"/>
   <table-filter match-catalog="mydb" match-name="as_clase_interface"/>
   <table-filter match-catalog="mydb" match-name="as_interface"/>

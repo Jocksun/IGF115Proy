@@ -14,7 +14,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1"
 	name="viewport">
-<title>Test page</title>
+<title>As Atributo</title>
 
 <link
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
@@ -26,7 +26,7 @@
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Tipo Atributo</title>
+<title>AS Atributo</title>
 </head>
 <body>
 	<div class="wrap">
@@ -36,28 +36,38 @@
 
 				<thead>
 					<tr>
-						<th>ID Atributo</th>
-						<th>Tipo Atributo</th>
+						<th>ID Clase</th>
+						<th>Codigo Atributo</th>
+						<th>Codigo Metodo</th>
+						<th>Descr Atributo</th>
+						<th>Descr Tipo Dato Atributo</th>
+						<th>Usuario</th>
 						<th>Fecha</th>
+						<th>Codigo Tipo Atributo</th>
 						<th colspan=2>Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${lst}" var="user">
 						<tr>
-							<td><c:out value="${user.CTipoAtributo}" /></td>
-							<td><c:out value="${user.DTipoAtributo}" /></td>
+							<td><c:out value="${user.CClase}" /></td>
+							<td><c:out value="${user.CAtributo}" /></td>
+							<td><c:out value="${user.CMetodo}" /></td>
+							<td><c:out value="${user.DAtributo}" /></td>
+							<td><c:out value="${user.DTipoDatoAtributo}" /></td>
+							<td><c:out value="${user.CUsuario}" /></td>
 							<td><fmt:formatDate pattern="dd MMM,yyyy"
 									value="${user.FIngreso}" /></td>
+							<td><c:out value="${user.CTipoAtributo}" /></td>
 							<td><a
-								href="../TbTipoAtributoController?action=edit&userId=<c:out value="${user.CTipoAtributo}"/>">Update</a></td>
+								href="../AsAtributoController?action=edit&userId=<c:out value="${user.CTipoAtributo}"/>">Update</a></td>
 							<td><a
-								href="../TbTipoAtributoController?action=delete&userId=<c:out value="${user.CTipoAtributo}"/>">Delete</a></td>
+								href="../AsAtributoController?action=delete&userId=<c:out value="${user.CTipoAtributo}"/>">Delete</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-			<a href="../TbTipoAtributoController?action=insert" role="button"
+			<a href="../AsAtributoController?action=insert" role="button"
 				class="btn btn-info btn-lg" data-toggle="modal">Agregar</a>
 		</div>
 		</section>

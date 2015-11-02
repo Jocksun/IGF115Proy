@@ -23,13 +23,13 @@
 			<div class="form-group">
 				<label for="personid"> Codigo Atributo: <input
 					class="form-control" type="number" id="codigo" name="codigo"
-					value=<c:out value="${tbTipoAtributo.getCTipoAtributo} }" /> />
+					value=<c:out value="${TbTipoAtributo.CTipoAtributo}" /> />
 				</label>
 			</div>
 			<div class="form-group">
 				<label for="name"> Descripcion Atributo:<input
 					class="form-control" type="text" id="descripcion"
-					name="descripcion" value="<c:out value="" />" />
+					name="descripcion" value="<c:out value="${TbTipoAtributo.DTipoAtributo}" />" />
 				</label>
 			</div>
 

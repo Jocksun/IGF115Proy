@@ -22,6 +22,17 @@
 		<servlet-name>TbTipoAtributoController</servlet-name>
 		<url-pattern>/TbTipoAtributoController</url-pattern>
 	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>AsAtributoController</servlet-name>
+		<servlet-class>sv.edu.ues.igf115.controller.AsAtributoController</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AsAtributoController</servlet-name>
+		<url-pattern>/AsAtributoController</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>UserController</servlet-name>
