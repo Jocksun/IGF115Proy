@@ -10,16 +10,11 @@ import org.hibernate.Transaction;
 import sv.edu.ues.igf115.model.TbTipoAtributo;
 import sv.edu.ues.igf115.utilidades.HibernateUtil;
 
-
-
-
 public class TbTipoAtributoDao {
 	private HibernateUtil hu = new HibernateUtil();
 	private SessionFactory sf;
 	private Session s;
 	private Transaction tx;
-	
-	
 
 	public boolean guardar(TbTipoAtributo tbTipoAtributo) {
 		try {
@@ -28,12 +23,12 @@ public class TbTipoAtributoDao {
 			finTransaccion();
 			return true;
 		} catch (Exception e) {
-			System.err.println(this + "Ocurrio un error al guardar TbTipoAtributo " + e.getMessage());
+			System.err.println(this
+					+ "Ocurrio un error al guardar TbTipoAtributo "
+					+ e.getMessage());
 			return false;
 		}
 	}
-	
-	
 
 	public boolean borrar(String cTipoAtributo) {
 		try {
@@ -43,7 +38,9 @@ public class TbTipoAtributoDao {
 			finTransaccion();
 			return true;
 		} catch (Exception e) {
-			System.err.println(this + "Ocurrio un error al borrar TbTipoAtributo " + e.getMessage());
+			System.err.println(this
+					+ "Ocurrio un error al borrar TbTipoAtributo "
+					+ e.getMessage());
 			return false;
 		}
 	}
@@ -55,32 +52,45 @@ public class TbTipoAtributoDao {
 			finTransaccion();
 			return true;
 		} catch (Exception e) {
-			System.err.println(this + "Ocurrio un error al Actualizar TbTipoAtributo" + e.getMessage());
+			System.err.println(this
+					+ "Ocurrio un error al Actualizar TbTipoAtributo"
+					+ e.getMessage());
 			return false;
 		}
 	}
 
-
 	public List<TbTipoAtributo> findByAll() {
 		try {
 			iniciarSesion();
-			//Query query = s.getNamedQuery("TbTipoAtributo.findAll");
+			// Query query = s.getNamedQuery("TbTipoAtributo.findAll");
 			Query query = s.createQuery("Select u From TbTipoAtributo u");
-			List<TbTipoAtributo> lst =query.list();
+			List<TbTipoAtributo> lst = query.list();
 			finSesion();
 			return lst;
 		} catch (Exception e) {
-			System.out.println("Error TbTipoAtributoDao---findByAll "+e);
+			System.out.println("Error TbTipoAtributoDao---findByAll " + e);
 		}
 		return null;
-		
+
 	}
 
 	public TbTipoAtributo findByIdTbTipoAtributo(String idTipo) {
-		Query query = s.getNamedQuery("TbTipoAtributo.findByIdcTipoAtributo");
-		query.setParameter("tipoAtributo", idTipo);
-		TbTipoAtributo tbTipoAtributo = (TbTipoAtributo) query.uniqueResult();
-		return tbTipoAtributo;
+
+		try {
+			iniciarSesion();
+			// Query query =
+			// s.getNamedQuery("TbTipoAtributo.findByIdcTipoAtributo");
+			Query query = s
+					.createQuery("Select u from TbTipoAtributo u where u.cTipoAtributo =:idTipo");
+			query.setParameter("idTipo", idTipo);
+			TbTipoAtributo tbTipoAtributo = (TbTipoAtributo) query
+					.uniqueResult();
+			return tbTipoAtributo;
+		} catch (Exception e) {
+			System.out.println("eroro  " + e);
+		}
+		return null;
+
 	}
 
 	private void iniciarTransaccion() {

@@ -14,43 +14,44 @@ import sv.edu.ues.igf115.dao.TbTipoAtributoDao;
 
 import sv.edu.ues.igf115.model.TbTipoAtributo;
 
+public class TbTipoAtributoController extends HttpServlet {
 
-
-public class TbTipoAtributoController extends HttpServlet  {
-	
-	
 	private static final long serialVersionUID = 1L;
 	private static String INSERT_OR_EDIT = "/tipoatributo/new.jsp";
 	private static String LIST_USER = "/tipoatributo/atributos.jsp";
-	
+
 	private TbTipoAtributoDao dao;
-	
-	
+
 	public TbTipoAtributoController() {
 		super();
 		dao = new TbTipoAtributoDao();
 	}
-	
-	
+
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String forward = "";
 		String action = request.getParameter("action");
 
 		if (action.equalsIgnoreCase("delete")) {
-			String userId = request.getParameter("userId");			
+			String userId = request.getParameter("userId");
 			dao.borrar(userId);
 			forward = LIST_USER;
 			request.setAttribute("tbTipoAtributo", dao.findByAll());
 		} else if (action.equalsIgnoreCase("edit")) {
-			forward = INSERT_OR_EDIT;
-			String userId = request.getParameter("userId");
-			TbTipoAtributo tbTipoAtributo = dao.findByIdTbTipoAtributo(userId);
-			request.setAttribute("tbTipoAtributo", tbTipoAtributo);
+			try {
+				forward = INSERT_OR_EDIT;
+				String userId = request.getParameter("userId");
+				TbTipoAtributo tbTipoAtributo = dao
+						.findByIdTbTipoAtributo(userId);
+				request.setAttribute("tbTipoAtributo", tbTipoAtributo);
+			} catch (Exception e) {
+				System.out.println("error "+e);
+			}
+
 		} else if (action.equalsIgnoreCase("listUser")) {
 			forward = LIST_USER;
-			
-			List<TbTipoAtributo> lst= dao.findByAll();			
+
+			List<TbTipoAtributo> lst = dao.findByAll();
 			request.setAttribute("lst", lst);
 		} else {
 			forward = INSERT_OR_EDIT;
@@ -60,33 +61,29 @@ public class TbTipoAtributoController extends HttpServlet  {
 		view.forward(request, response);
 	}
 
-	
-	
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+
 		TbTipoAtributo tbTipoAtributo = new TbTipoAtributo();
-		tbTipoAtributo.setCTipoAtributo(request.getParameter("cTipoAtributo"));
-		tbTipoAtributo.setDTipoAtributo(request.getParameter("dTipoAtributo"));
+		tbTipoAtributo.setCTipoAtributo(request.getParameter("codigo"));
+		tbTipoAtributo.setDTipoAtributo(request.getParameter("descripcion"));
 		tbTipoAtributo.setFIngreso(new Date());
-		
-		
-//		String userid = request.getParameter("cTipoAtributo");
-//		if(userid == null || userid.isEmpty())
-//		 {
-//		     dao.guardar(tbTipoAtributo);
-//		 }
-//		// else
-//		// {
-//		user.setUname(userid);
+
+		// String userid = request.getParameter("cTipoAtributo");
+		// if(userid == null || userid.isEmpty())
+		// {
+		// dao.guardar(tbTipoAtributo);
+		// }
+		// // else
+		// // {
+		// user.setUname(userid);
 		dao.guardar(tbTipoAtributo);
 		// }
 		RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
-		request.setAttribute("tbTipoAtributo", dao.findByAll());
+		request.setAttribute("lst", dao.findByAll());
 		view.forward(request, response);
 	}
-	
-	
+
 	public boolean guardar(TbTipoAtributo tbTipoAtributo) {
 		return dao.guardar(tbTipoAtributo);
 	}
@@ -104,5 +101,3 @@ public class TbTipoAtributoController extends HttpServlet  {
 		return lst;
 	}
 }
-
-

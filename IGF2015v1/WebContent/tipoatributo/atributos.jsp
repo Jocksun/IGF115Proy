@@ -51,8 +51,8 @@
 					<td><%=category.getCTipoAtributo()%></td>
 					<td><%=category.getDTipoAtributo()%></td>
 					<td><%=category.getFIngreso()%></td>
-					 <td><a href="TbTipoAtributoController?action=edit&userId=<c:out value="<%=category.getCTipoAtributo()%>"/>">Update</a></td>
-                    <td><a href="TbTipoAtributoController?action=delete&userId=<c:out value="<%=category.getCTipoAtributo()%>"/>">Delete</a></td>
+					<td><a href="../TbTipoAtributoController?action=edit&userId=<c:out value="<%=category.getCTipoAtributo()%>"/>">Update</a></td>
+                    <td><a href="../TbTipoAtributoController?action=delete&userId=<c:out value="<%=category.getCTipoAtributo()%>"/>">Delete</a></td>
                     <tr>
 			<%	}
 			%>
