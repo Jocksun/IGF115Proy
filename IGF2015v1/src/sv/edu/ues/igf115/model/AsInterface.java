@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,6 +25,11 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "as_interface", catalog = "mydb", schema = "")
+@NamedQueries({
+	@NamedQuery(name = "As_interface.findAll", query = "SELECT d FROM As_interface d"),
+	@NamedQuery(name = "As_interface.findByIdDep", query = "SELECT d FROM As_interface d WHERE d.c_interface = :c_interface"),
+	@NamedQuery(name = "As_interface.findByNombreDep", query = "SELECT d FROM As_interface d WHERE d.c_interface = :c_interface") })
+
 public class AsInterface implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,8 +54,11 @@ public class AsInterface implements Serializable {
     public AsInterface() {
     }
 
-    public AsInterface(Integer cInterface) {
+    public AsInterface(Integer cInterface, String dInterface, String cUsuario, Date fIngreso) {
         this.cInterface = cInterface;
+        this.dInterface = dInterface;
+        this.cUsuario = cUsuario;
+        this.fIngreso = fIngreso;
     }
 
     public Integer getCInterface() {
