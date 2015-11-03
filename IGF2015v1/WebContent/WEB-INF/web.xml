@@ -45,6 +45,15 @@
 	</servlet-mapping>
     
     
+    <servlet>
+		<servlet-name>TbTipoMetodoController</servlet-name>
+		<servlet-class>sv.edu.ues.igf115.controller.TbTipoMetodoController</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TbTipoMetodoController</servlet-name>
+		<url-pattern>/TbTipoMetodoController</url-pattern>
+	</servlet-mapping>
     
     <session-config>
         <session-timeout>
