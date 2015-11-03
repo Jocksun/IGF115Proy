@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sv.edu.ues.igf115.dao.AsAtributoDao;
+import sv.edu.ues.igf115.dao.AsClaseDao;
 import sv.edu.ues.igf115.dao.AsMetodoDao;
 import sv.edu.ues.igf115.dao.TbTipoAtributoDao;
 import sv.edu.ues.igf115.model.AsAtributo;
+import sv.edu.ues.igf115.model.AsClase;
 import sv.edu.ues.igf115.model.AsMetodo;
 import sv.edu.ues.igf115.model.TbTipoAtributo;
 
@@ -28,12 +30,14 @@ public class AsAtributoController extends HttpServlet {
 	private AsAtributoDao dao;
 	private TbTipoAtributoDao tbTipoAtributoDao;
 	private AsMetodoDao asMetodoDao;
+	private AsClaseDao asClaseDao;
 
 	public AsAtributoController() {
 		super();
 		dao = new AsAtributoDao();
 		tbTipoAtributoDao= new TbTipoAtributoDao();
 		asMetodoDao = new AsMetodoDao();
+		asClaseDao = new AsClaseDao();
 	}
 
 	protected void doGet(HttpServletRequest request,
@@ -59,14 +63,20 @@ public class AsAtributoController extends HttpServlet {
 				List<AsMetodo> lstMetodo=asMetodoDao.findByAll();
 				request.setAttribute("lstMetodo", lstMetodo);
 				
+				List<AsClase> lstAsClase=asClaseDao.findByAll();
+				request.setAttribute("lstAsClase", lstAsClase);
+				
+				
 			} catch (Exception e) {
 				System.out.println("error "+e);
 			}
 
 		} else if (action.equalsIgnoreCase("listUser")) {
+			
 			forward = LIST_USER;
 			List<AsAtributo> lst = dao.findByAll();
 			request.setAttribute("lst", lst);
+		
 		} else {
 			forward = INSERT_OR_EDIT;
 			List<TbTipoAtributo> lstAtributo = tbTipoAtributoDao.findByAll();
@@ -74,6 +84,9 @@ public class AsAtributoController extends HttpServlet {
 			
 			List<AsMetodo> lstMetodo=asMetodoDao.findByAll();
 			request.setAttribute("lstMetodo", lstMetodo);
+			
+			List<AsClase> lstAsClase=asClaseDao.findByAll();
+			request.setAttribute("lstAsClase", lstAsClase);
 		}
 
 		RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -86,20 +99,18 @@ public class AsAtributoController extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		AsAtributo asAtributo = new AsAtributo();
-		asAtributo.setCTipoAtributo(request.getParameter("codigo"));
-	//	asAtributo.setDTipoAtributo(request.getParameter("descripcion"));
+	
+		asAtributo.setCClase(Integer.parseInt(request.getParameter("clase")));
+		asAtributo.setCAtributo(Integer.parseInt(request.getParameter("codigoAtributo")));
+		asAtributo.setCMetodo(Integer.parseInt(request.getParameter("metodoid")));
+		asAtributo.setDAtributo(request.getParameter("descripcioAtrib"));
+		asAtributo.setDTipoDatoAtributo(request.getParameter("descripcionTipoDatoAtr"));
+		asAtributo.setCUsuario(request.getParameter("usuario"));
 		asAtributo.setFIngreso(new Date());
-
-		// String userid = request.getParameter("cTipoAtributo");
-		// if(userid == null || userid.isEmpty())
-		// {
-		// dao.guardar(asAtributo);
-		// }
-		// // else
-		// // {
-		// user.setUname(userid);
+		asAtributo.setCTipoAtributo(request.getParameter("codTipoAtrib"));
+		
 		dao.guardar(asAtributo);
-		// }
+		
 		RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
 		request.setAttribute("lst", dao.findByAll());
 		view.forward(request, response);

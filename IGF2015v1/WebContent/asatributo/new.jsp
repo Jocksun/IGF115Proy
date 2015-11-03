@@ -17,66 +17,72 @@
 </head>
 <body>
 	<div class="container">
-		<form method="POST" action='TbTipoAtributoController'
-			name="frmAddAtributo" role="form">
+		<form method="POST" action='AsAtributoController'
+			name="frmAddAsAtributo" role="form">
 
 			<div class="form-group">
-				<label for="personid"> Codigo Atributo: <input
-					class="form-control" type="number" id="codigo" name="codigo"
-					value=<c:out value="${TbTipoAtributo.CTipoAtributo}" /> />
-				</label>
-			</div>
-			<div class="form-group">
-				<label for="personid"> Codigo Metodo: <input
-					class="form-control" type="number" id="codigo" name="codigo"
-					value=<c:out value="${TbTipoAtributo.CTipoAtributo}" /> />
-				</label>
-			</div>
-			
-			<div class="form-group">
-				<label for="metodoid"> Codigo Metodo: 
-							<select name='met'>
-									<option value="${AsAtributo.CMetodo}" selected>${AsAtributo.CMetodo}</option>
-									<c:forEach items="${lstMetodo}" var="met">										
-											<option value="${met.asMetodoPK.CMetodo}">${met.asMetodoPK.CMetodo}</option>										
-									</c:forEach>
-							</select>
-				</label>																			
-			</div>
-			
-			
-			<div class="form-group">
-				<label for="personid"> Descripcion Atributo: <input
-					class="form-control" type="text" id="codigo" name="codigo"
-					value=<c:out value="${TbTipoAtributo.CTipoAtributo}" /> />
-				</label>
-			</div>
-			<div class="form-group">
-				<label for="name"> Descripcion Tipo Dato Atributo:<input
-					class="form-control" type="text" id="descripcion"
-					name="descripcion" value="<c:out value="${TbTipoAtributo.DTipoAtributo}" />" />
-				</label>
-			</div>
-			<div class="form-group">
-				<label for="name"> Usuario:<input
-					class="form-control" type="text" id="descripcion"
-					name="descripcion" value="<c:out value="${TbTipoAtributo.DTipoAtributo}" />" />
+				<label for="clase"> Codigo Clase: <select name='clase'>
+						<option value="${AsAtributo.CClase}" selected>${AsAtributo.CClase}</option>
+						<c:forEach items="${lstAsClase}" var="clas">
+							<option value="${clas.CClase}">${clas.CClase}</option>
+						</c:forEach>
+				</select>
 				</label>
 			</div>
 
 			<div class="form-group">
-				<label for="personid"> Codigo Tipo Atributo: 
-							<select name='role'>
-									<option value="${AsAtributo.CTipoAtributo}" selected>${AsAtributo.CTipoAtributo}</option>
-									<c:forEach items="${lstAtributo}" var="role">										
-											<option value="${role.CTipoAtributo}">${role.CTipoAtributo}</option>										
-									</c:forEach>
-							</select>
-				</label>																			
+				<label for="codigoAtributo"> Codigo Atributo: <input
+					class="form-control" type="number" id="codigoAtributo"
+					name="codigoAtributo"
+					value=<c:out value="${AsAtributo.CAtributo}" /> />
+				</label>
 			</div>
 
-			<input type="Agregar" value="Submit" class="btn btn-info" />
-			 <input type="submit" value="Consultar"/>
+			<div class="form-group">
+				<label for="metodoid"> Codigo Metodo: <select
+					name='metodoid'>
+						<option value="${AsAtributo.CMetodo}" selected>${AsAtributo.CMetodo}</option>
+						<c:forEach items="${lstMetodo}" var="met">
+							<option value="${met.asMetodoPK.CMetodo}">${met.asMetodoPK.CMetodo}</option>
+						</c:forEach>
+				</select>
+				</label>
+			</div>
+			<div class="form-group">
+				<label for="descripcioAtrib"> Descripcion Atributo: <input
+					class="form-control" type="text" id="descripcioAtrib"
+					name="descripcioAtrib"
+					value=<c:out value="${AsAtributo.DAtributo}"/> />
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label for="descripcionTipoDatoAtr"> Descripcion Tipo Dato
+					Atributo:<input class="form-control" type="text"
+					id="descripcionTipoDatoAtr" name="descripcionTipoDatoAtr"
+					value="<c:out value="${AsAtributo.DTipoDatoAtributo}" />" />
+				</label>
+			</div>
+			<div class="form-group">
+				<label for="usuario"> Usuario:<input class="form-control"
+					type="text" id="usuario" name="usuario"
+					value="<c:out value="${AsAtributo.CUsuario}" />" />
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label for="codTipoAtrib"> Codigo Tipo Atributo: <select
+					name='codTipoAtrib'>
+						<option value="${AsAtributo.CTipoAtributo}" selected>${AsAtributo.CTipoAtributo}</option>
+						<c:forEach items="${lstAtributo}" var="role">
+							<option value="${role.CTipoAtributo}">${role.CTipoAtributo}</option>
+						</c:forEach>
+				</select>
+				</label>
+			</div>
+
+			<input type="Agregar" value="Submit" class="btn btn-info" /> <input
+				type="submit" value="Consultar" />
 		</form>
 	</div>
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
