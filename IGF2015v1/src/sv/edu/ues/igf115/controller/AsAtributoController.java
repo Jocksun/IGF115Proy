@@ -116,20 +116,5 @@ public class AsAtributoController extends HttpServlet {
 		view.forward(request, response);
 	}
 
-	public boolean guardar(AsAtributo asAtributo) {
-		return dao.guardar(asAtributo);
-	}
-
-	public boolean borrar(String idCliente) {
-		return dao.borrar(idCliente);
-	}
-
-	public boolean actualizar(AsAtributo asAtributo) {
-		return dao.Actualizar(asAtributo);
-	}
-
-	public List<AsAtributo> findByAll() {
-		List<AsAtributo> lst = dao.findByAll();
-		return lst;
-	}
+	
 }

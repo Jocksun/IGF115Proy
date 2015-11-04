@@ -54,6 +54,18 @@
 		<servlet-name>TbTipoMetodoController</servlet-name>
 		<url-pattern>/TbTipoMetodoController</url-pattern>
 	</servlet-mapping>
+	
+	
+	
+    <servlet>
+		<servlet-name>AsMetodoController</servlet-name>
+		<servlet-class>sv.edu.ues.igf115.controller.AsMetodoController</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AsMetodoController</servlet-name>
+		<url-pattern>/AsMetodoController</url-pattern>
+	</servlet-mapping>
     
     <session-config>
         <session-timeout>
