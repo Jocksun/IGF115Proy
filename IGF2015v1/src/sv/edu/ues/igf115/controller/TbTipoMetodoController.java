@@ -34,7 +34,8 @@ public class TbTipoMetodoController extends HttpServlet {
 
 		if (action.equalsIgnoreCase("delete")) {
 			String userId = request.getParameter("userId");
-			dao.borrar(userId);
+			TbTipoMetodo tbTipoMetodo= dao.findByIdTbTipoMetodo(userId);
+			dao.eliminar(tbTipoMetodo);
 			forward = LIST_USER;
 			request.setAttribute("lst", dao.findByAll());
 		} else if (action.equalsIgnoreCase("edit")) {

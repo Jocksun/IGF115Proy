@@ -10,7 +10,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import sv.edu.ues.igf115.utilidades.HibernateUtil;
+
+import sv.edu.ues.igf115.utilidades.HibernateUtils;
 
 
 
@@ -19,14 +20,14 @@ import sv.edu.ues.igf115.utilidades.HibernateUtil;
 public class GenericDAOImplHibernate<T, ID extends Serializable> implements
 		GenericDao<T, ID> {
 	
-	private HibernateUtil hibernateUtil = new HibernateUtil() ;	
+	private HibernateUtils hibernateUtil = new HibernateUtils() ;	
 	private SessionFactory sessionFactory = hibernateUtil.getSessionFactory() ;
 	private Session session; 
 	
 	protected final Log log = LogFactory.getLog(getClass());
 
 	public GenericDAOImplHibernate() {
-		sessionFactory = HibernateUtil.getSessionFactory();
+		sessionFactory = HibernateUtils.getSessionFactory();
 
 	}
 

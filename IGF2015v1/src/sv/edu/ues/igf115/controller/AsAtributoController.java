@@ -47,7 +47,8 @@ public class AsAtributoController extends HttpServlet {
 
 		if (action.equalsIgnoreCase("delete")) {
 			String userId = request.getParameter("userId");
-			dao.borrar(userId);
+			AsAtributo asAtributo=dao.findByIdAsAtributo(userId);
+			dao.borrar(asAtributo);
 			forward = LIST_USER;
 			request.setAttribute("lst", dao.findByAll());
 		} else if (action.equalsIgnoreCase("edit")) {

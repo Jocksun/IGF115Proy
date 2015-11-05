@@ -3,116 +3,88 @@ package sv.edu.ues.igf115.dao;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import sv.edu.ues.igf115.model.AsAtributo;
-import sv.edu.ues.igf115.utilidades.HibernateUtil;
+import sv.edu.ues.igf115.utilidades.HibernateUtils;
 
 public class AsAtributoDao {
-	private HibernateUtil hu = new HibernateUtil();
-	private SessionFactory sf;
-	private Session s;
+	private HibernateUtils hibernateUtil = new HibernateUtils() ;
+	private SessionFactory sessionFactory = hibernateUtil.getSessionFactory();
+	private Session sesion;
 	private Transaction tx;
 
-	public boolean guardar(AsAtributo asAtributo) {
+	
+	private void iniciaOperacion() throws HibernateException {
+		sesion = sessionFactory.openSession() ;
+		tx = sesion.beginTransaction() ;
+		}
+	
+	private void manejaExcepcion(HibernateException he)
+			throws HibernateException {
+		tx.rollback();
+		throw new HibernateException("Ocurrió un error en la AsAtributoDao ", he);
+	} 
+	
+	public void guardar(AsAtributo asAtributo) {
 		try {
-			iniciarTransaccion();
-			s.saveOrUpdate(asAtributo);
-			finTransaccion();
-			return true;
-		} catch (Exception e) {
-			System.err.println(this
-					+ "Ocurrio un error al guardar AsAtributo "
-					+ e.getMessage());
-			return false;
+			iniciaOperacion();
+			sesion.saveOrUpdate(asAtributo);
+			tx.commit();
+			sesion.flush();
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		} finally {
+			sesion.close();
+		}
+	}
+	
+	public void borrar(AsAtributo asAtributo) {
+		try {
+			iniciaOperacion();
+			sesion.delete(asAtributo);
+			tx.commit();
+			sesion.flush();
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		} finally {
+			sesion.close();
 		}
 	}
 
-	public boolean borrar(String cTipoAtributo) {
-		try {
-			iniciarTransaccion();
-			AsAtributo asAtributo = findByIdAsAtributo(cTipoAtributo);
-			s.delete(asAtributo);
-			finTransaccion();
-			return true;
-		} catch (Exception e) {
-			System.err.println(this
-					+ "Ocurrio un error al borrar AsAtributo "
-					+ e.getMessage());
-			return false;
-		}
-	}
 
-	public boolean Actualizar(AsAtributo asAtributo) {
-		try {
-			iniciarTransaccion();
-			s.saveOrUpdate(asAtributo);
-			finTransaccion();
-			return true;
-		} catch (Exception e) {
-			System.err.println(this
-					+ "Ocurrio un error al Actualizar AsAtributo"
-					+ e.getMessage());
-			return false;
+	public AsAtributo daAsAtributoById(short idDep){
+		 sesion = sessionFactory.openSession() ;
+		 // Retorna la instancia persistente de la clase por medio del	atributo identidad
+		 AsAtributo id = (AsAtributo) sesion.get(AsAtributo.class, new Short(idDep)) ;
+		 sesion.close() ;
+		 return id ;
 		}
-	}
-
+	
 	public List<AsAtributo> findByAll() {
-		try {
-			iniciarSesion();
-			// Query query = s.getNamedQuery("AsAtributo.findAll");
-			Query query = s.createQuery("Select u From AsAtributo u");
-			List<AsAtributo> lst = query.list();
-			finSesion();
-			return lst;
-		} catch (Exception e) {
-			System.out.println("Error AsAtributoDao---findByAll " + e);
-		}
-		return null;
-
+		sesion = sessionFactory.openSession();
+		//Query query = sesion.getNamedQuery("Departamentos.findAll");
+		Query query = sesion.createQuery("Select u From AsAtributo u");
+		List<AsAtributo> asAtributo = query.list();
+		sesion.close();
+		return asAtributo;
 	}
 
-	public AsAtributo findByIdAsAtributo(String idTipo) {
-
-		try {
-			iniciarSesion();
-			// Query query =
-			// s.getNamedQuery("AsAtributo.findByIdcTipoAtributo");
-			Query query = s
-					.createQuery("Select u from AsAtributo u where u.cTipoAtributo =:idTipo");
-			query.setParameter("idTipo", idTipo);
-			AsAtributo asAtributo = (AsAtributo) query
-					.uniqueResult();
-			return asAtributo;
-		} catch (Exception e) {
-			System.out.println("eroro  " + e);
-		}
-		return null;
-
+	public AsAtributo findByIdAsAtributo(String nombre) {
+		sesion = sessionFactory.openSession();
+//		Query query = sesion.getNamedQuery("Departamentos.findByNombreDep");
+//		query.setParameter("nombreDep", nombre);
+		Query query = sesion.createQuery("Select u from AsAtributo u where u.cClase =:idTipo");
+		query.setParameter("idTipo", nombre);
+		AsAtributo asAtributo = (AsAtributo) query.uniqueResult();
+		sesion.close();
+		return asAtributo;
 	}
 
-	private void iniciarTransaccion() {
-		sf = hu.getSf();
-		s = sf.openSession();
-		tx = s.beginTransaction();
-	}
-
-	private void finTransaccion() {
-		s.flush();
-		tx.commit();
-		s.close();
-	}
-
-	private void iniciarSesion() {
-		sf = hu.getSf();
-		s = sf.openSession();
-	}
-
-	private void finSesion() {
-		s.flush();
-		s.close();
-	}
 }

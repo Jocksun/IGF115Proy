@@ -2,116 +2,91 @@ package sv.edu.ues.igf115.dao;
 
 import java.util.List;
 
+
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import sv.edu.ues.igf115.model.AsMetodo;
-import sv.edu.ues.igf115.utilidades.HibernateUtil;
+import sv.edu.ues.igf115.utilidades.HibernateUtils;
 
 public class AsMetodoDao {
-	private HibernateUtil hu = new HibernateUtil();
-	private SessionFactory sf;
-	private Session s;
+	
+	private HibernateUtils hibernateUtil = new HibernateUtils() ;
+	private SessionFactory sessionFactory = hibernateUtil.getSessionFactory();
+	private Session sesion;
 	private Transaction tx;
-
-	public boolean guardar(AsMetodo asMetodo) {
-		try {
-			iniciarTransaccion();
-			s.saveOrUpdate(asMetodo);
-			finTransaccion();
-			return true;
-		} catch (Exception e) {
-			System.err.println(this
-					+ "Ocurrio un error al guardar AsMetodo "
-					+ e.getMessage());
-			return false;
+	
+	private void iniciaOperacion() throws HibernateException {
+		sesion = sessionFactory.openSession() ;
+		tx = sesion.beginTransaction() ;
 		}
+	
+	private void manejaExcepcion(HibernateException he)
+			throws HibernateException {
+		tx.rollback();
+		throw new HibernateException("Ocurrió un error en la capa AsMetodoDao", he);
 	}
+	
 
-	public boolean borrar(String id) {
-		try {
-			iniciarTransaccion();
-			AsMetodo asMetodo = findByIdAsMetodo(id);
-			s.delete(asMetodo);
-			finTransaccion();
-			return true;
-		} catch (Exception e) {
-			System.err.println(this
-					+ "Ocurrio un error al borrar AsMetodo "
-					+ e.getMessage());
-			return false;
+		public void guardar(AsMetodo asMetodo) {
+			try {
+				iniciaOperacion();
+				sesion.saveOrUpdate(asMetodo);
+				tx.commit();
+				sesion.flush();
+			} catch (HibernateException he) {
+				manejaExcepcion(he);
+				throw he;
+			} finally {
+				sesion.close();
+			}
 		}
-	}
 
-	public boolean Actualizar(AsMetodo asMetodo) {
-		try {
-			iniciarTransaccion();
-			s.saveOrUpdate(asMetodo);
-			finTransaccion();
-			return true;
-		} catch (Exception e) {
-			System.err.println(this
-					+ "Ocurrio un error al Actualizar AsMetodo"
-					+ e.getMessage());
-			return false;
+
+			
+		public void eliminar(AsMetodo asMetodo) {
+			try {
+				iniciaOperacion();
+				sesion.delete(asMetodo);
+				tx.commit();
+				sesion.flush();
+			} catch (HibernateException he) {
+				manejaExcepcion(he);
+				throw he;
+			} finally {
+				sesion.close();
+			}
 		}
-	}
-
-	public List<AsMetodo> findByAll() {
-		try {
-			iniciarSesion();
-			// Query query = s.getNamedQuery("AsMetodo.findAll");
-			Query query = s.createQuery("Select u From AsMetodo u");
-			List<AsMetodo> lst = query.list();
-			finSesion();
-			return lst;
-		} catch (Exception e) {
-			System.out.println("Error AsMetodoDao---findByAll " + e);
-		}
-		return null;
-
-	}
-
-	public AsMetodo findByIdAsMetodo(String id) {
-
-		try {
-			iniciarSesion();
-			// Query query =
-			// s.getNamedQuery("AsMetodo.findByIdcTipoAtributo");
-			Query query = s
-					.createQuery("Select u from AsMetodo u where u.asMetodoPK.cMetodo =:id");
-			query.setParameter("id", id);
-			AsMetodo asMetodo = (AsMetodo) query
-					.uniqueResult();
+		
+		public AsMetodo daDepartamentoById(short idDep){
+			 sesion = sessionFactory.openSession() ;
+			 // Retorna la instancia persistente de la clase por medio del	atributo identidad
+			 AsMetodo id = (AsMetodo) sesion.get(AsMetodo.class, new Short(idDep)) ;
+			 sesion.close() ;
+			 return id ;
+			}
+		
+		public List<AsMetodo> findByAll() {
+			sesion = sessionFactory.openSession();
+			//Query query = sesion.getNamedQuery("Departamentos.findAll");
+			Query query = sesion.createQuery("Select u From AsMetodo u");
+			List<AsMetodo> asMetodo = query.list();
+			sesion.close();
 			return asMetodo;
-		} catch (Exception e) {
-			System.out.println("eroro  " + e);
 		}
-		return null;
 
-	}
-
-	private void iniciarTransaccion() {
-		sf = hu.getSf();
-		s = sf.openSession();
-		tx = s.beginTransaction();
-	}
-
-	private void finTransaccion() {
-		s.flush();
-		tx.commit();
-		s.close();
-	}
-
-	private void iniciarSesion() {
-		sf = hu.getSf();
-		s = sf.openSession();
-	}
-
-	private void finSesion() {
-		s.flush();
-		s.close();
-	}
+		public AsMetodo findByIdAsMetodo(String nombre) {
+			sesion = sessionFactory.openSession();
+//			Query query = sesion.getNamedQuery("Departamentos.findByNombreDep");
+//			query.setParameter("nombreDep", nombre);
+			Query query = sesion.createQuery("Select u from AsMetodo u where u.cTipoAtributo =:idTipo");
+			query.setParameter("idTipo", nombre);
+			AsMetodo asMetodo = (AsMetodo) query.uniqueResult();
+			sesion.close();
+			return asMetodo;
+		}
+		
 }

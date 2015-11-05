@@ -9,12 +9,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import sv.edu.ues.igf115.model.AsInterface;
-import sv.edu.ues.igf115.utilidades.HibernateUtil;
+import sv.edu.ues.igf115.utilidades.HibernateUtils;
 
 
 public class AsInterfaceDao {
 
-	private HibernateUtil hibernateUtil = new HibernateUtil();
+	private HibernateUtils hibernateUtil = new HibernateUtils();
 	private SessionFactory sessionFactory = hibernateUtil.getSessionFactory();
 	private Session sesion;
 	private Transaction tx;

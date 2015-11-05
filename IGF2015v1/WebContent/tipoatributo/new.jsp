@@ -33,8 +33,7 @@
 				</label>
 			</div>
 
-			<input type="Agregar" value="Submit" class="btn btn-info" />
-			 <input type="submit" value="Consultar"/>
+			 <input type="submit" value="Agregar"/>
 		</form>
 	</div>
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>

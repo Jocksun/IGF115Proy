@@ -2,116 +2,91 @@ package sv.edu.ues.igf115.dao;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import sv.edu.ues.igf115.model.AsMetodoPK;
-import sv.edu.ues.igf115.utilidades.HibernateUtil;
+import sv.edu.ues.igf115.model.AsMetodoPK;
+import sv.edu.ues.igf115.utilidades.HibernateUtils;
 
 public class AsMetodoPKDao {
-	private HibernateUtil hu = new HibernateUtil();
-	private SessionFactory sf;
-	private Session s;
+	private HibernateUtils hibernateUtil = new HibernateUtils() ;
+	private SessionFactory sessionFactory = hibernateUtil.getSessionFactory();
+	private Session sesion;
 	private Transaction tx;
-
-	public boolean guardar(AsMetodoPK asMetodoPK) {
+	
+	private void iniciaOperacion() throws HibernateException {
+		sesion = sessionFactory.openSession() ;
+		tx = sesion.beginTransaction() ;
+		}
+	
+	private void manejaExcepcion(HibernateException he)
+			throws HibernateException {
+		tx.rollback();
+		throw new HibernateException("Ocurrió un error en la capa asMetodoPKDao", he);
+	}
+	
+	
+	public void guardar(AsMetodoPK asMetodoPK) {
 		try {
-			iniciarTransaccion();
-			s.saveOrUpdate(asMetodoPK);
-			finTransaccion();
-			return true;
-		} catch (Exception e) {
-			System.err.println(this
-					+ "Ocurrio un error al guardar AsMetodo "
-					+ e.getMessage());
-			return false;
+			iniciaOperacion();
+			sesion.saveOrUpdate(asMetodoPK);
+			tx.commit();
+			sesion.flush();
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		} finally {
+			sesion.close();
 		}
 	}
 
-	public boolean borrar(String id) {
+
+		
+	public void eliminar(AsMetodoPK asMetodoPK) {
 		try {
-			iniciarTransaccion();
-			AsMetodoPK asMetodoPK = findByIdAsMetodoPK(id);
-			s.delete(asMetodoPK);
-			finTransaccion();
-			return true;
-		} catch (Exception e) {
-			System.err.println(this
-					+ "Ocurrio un error al borrar AsMetodo "
-					+ e.getMessage());
-			return false;
+			iniciaOperacion();
+			sesion.delete(asMetodoPK);
+			tx.commit();
+			sesion.flush();
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		} finally {
+			sesion.close();
 		}
 	}
-
-	public boolean Actualizar(AsMetodoPK asMetodoPK) {
-		try {
-			iniciarTransaccion();
-			s.saveOrUpdate(asMetodoPK);
-			finTransaccion();
-			return true;
-		} catch (Exception e) {
-			System.err.println(this
-					+ "Ocurrio un error al Actualizar AsMetodoPK"
-					+ e.getMessage());
-			return false;
+	
+	public AsMetodoPK daDepartamentoById(short idDep){
+		 sesion = sessionFactory.openSession() ;
+		 // Retorna la instancia persistente de la clase por medio del	atributo identidad
+		 AsMetodoPK id = (AsMetodoPK) sesion.get(AsMetodoPK.class, new Short(idDep)) ;
+		 sesion.close() ;
+		 return id ;
 		}
-	}
-
+	
 	public List<AsMetodoPK> findByAll() {
-		try {
-			iniciarSesion();
-			// Query query = s.getNamedQuery("AsMetodoPK.findAll");
-			Query query = s.createQuery("Select u From AsMetodoPK u");
-			List<AsMetodoPK> lst = query.list();
-			finSesion();
-			return lst;
-		} catch (Exception e) {
-			System.out.println("Error AsMetodoPKDao---findByAll " + e);
-		}
-		return null;
-
+		sesion = sessionFactory.openSession();
+		//Query query = sesion.getNamedQuery("Departamentos.findAll");
+		Query query = sesion.createQuery("Select u From AsMetodoPK u");
+		List<AsMetodoPK> asMetodoPK = query.list();
+		sesion.close();
+		return asMetodoPK;
 	}
 
-	public AsMetodoPK findByIdAsMetodoPK(String id) {
-
-		try {
-			iniciarSesion();
-			// Query query =
-			// s.getNamedQuery("AsMetodoPK.findByIdcTipoAtributo");
-			Query query = s
-					.createQuery("Select u from AsMetodoPK u where u.asMetodoPK.cMetodo =:id");
-			query.setParameter("id", id);
-			AsMetodoPK asMetodoPK = (AsMetodoPK) query
-					.uniqueResult();
-			return asMetodoPK;
-		} catch (Exception e) {
-			System.out.println("eroro  " + e);
-		}
-		return null;
-
+	public AsMetodoPK findByIdAsMetodoPK(String nombre) {
+		sesion = sessionFactory.openSession();
+//		Query query = sesion.getNamedQuery("Departamentos.findByNombreDep");
+//		query.setParameter("nombreDep", nombre);
+		Query query = sesion.createQuery("Select u from AsMetodoPK u where u.cTipoAtributo =:idTipo");
+		query.setParameter("idTipo", nombre);
+		AsMetodoPK asMetodoPK = (AsMetodoPK) query.uniqueResult();
+		sesion.close();
+		return asMetodoPK;
 	}
 
-	private void iniciarTransaccion() {
-		sf = hu.getSf();
-		s = sf.openSession();
-		tx = s.beginTransaction();
-	}
 
-	private void finTransaccion() {
-		s.flush();
-		tx.commit();
-		s.close();
-	}
-
-	private void iniciarSesion() {
-		sf = hu.getSf();
-		s = sf.openSession();
-	}
-
-	private void finSesion() {
-		s.flush();
-		s.close();
-	}
 }

@@ -2,116 +2,91 @@ package sv.edu.ues.igf115.dao;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import sv.edu.ues.igf115.model.AsClase;
-import sv.edu.ues.igf115.utilidades.HibernateUtil;
+import sv.edu.ues.igf115.utilidades.HibernateUtils;
 
 public class AsClaseDao {
-	private HibernateUtil hu = new HibernateUtil();
-	private SessionFactory sf;
-	private Session s;
+	
+	
+	
+	private HibernateUtils hibernateUtil = new HibernateUtils() ;
+	private SessionFactory sessionFactory = hibernateUtil.getSessionFactory();
+	private Session sesion;
 	private Transaction tx;
+	
+	private void iniciaOperacion() throws HibernateException {
+		sesion = sessionFactory.openSession() ;
+		tx = sesion.beginTransaction() ;
+		}
+	
+	private void manejaExcepcion(HibernateException he)
+			throws HibernateException {
+		tx.rollback();
+		throw new HibernateException("Ocurrió un error en la capa AsClaseDao", he);
+	} 
+	
+	
 
-	public boolean guardar(AsClase asClase) {
+	public void guardar(AsClase asClase) {
 		try {
-			iniciarTransaccion();
-			s.saveOrUpdate(asClase);
-			finTransaccion();
-			return true;
-		} catch (Exception e) {
-			System.err.println(this
-					+ "Ocurrio un error al guardar AsClase "
-					+ e.getMessage());
-			return false;
+			iniciaOperacion();
+			sesion.saveOrUpdate(asClase);
+			tx.commit();
+			sesion.flush();
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		} finally {
+			sesion.close();
 		}
 	}
 
-	public boolean borrar(String id) {
+
+		
+	public void eliminar(AsClase asClase) {
 		try {
-			iniciarTransaccion();
-			AsClase asClase = findByIdAsClase(id);
-			s.delete(asClase);
-			finTransaccion();
-			return true;
-		} catch (Exception e) {
-			System.err.println(this
-					+ "Ocurrio un error al borrar AsClase "
-					+ e.getMessage());
-			return false;
+			iniciaOperacion();
+			sesion.delete(asClase);
+			tx.commit();
+			sesion.flush();
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		} finally {
+			sesion.close();
 		}
 	}
-
-	public boolean Actualizar(AsClase asClase) {
-		try {
-			iniciarTransaccion();
-			s.saveOrUpdate(asClase);
-			finTransaccion();
-			return true;
-		} catch (Exception e) {
-			System.err.println(this
-					+ "Ocurrio un error al Actualizar AsClase"
-					+ e.getMessage());
-			return false;
+	
+	public AsClase daDepartamentoById(short idDep){
+		 sesion = sessionFactory.openSession() ;
+		 // Retorna la instancia persistente de la clase por medio del	atributo identidad
+		 AsClase id = (AsClase) sesion.get(AsClase.class, new Short(idDep)) ;
+		 sesion.close() ;
+		 return id ;
 		}
-	}
-
+	
 	public List<AsClase> findByAll() {
-		try {
-			iniciarSesion();
-			// Query query = s.getNamedQuery("AsClase.findAll");
-			Query query = s.createQuery("Select u From AsClase u");
-			List<AsClase> lst = query.list();
-			finSesion();
-			return lst;
-		} catch (Exception e) {
-			System.out.println("Error AsClaseDao---findByAll " + e);
-		}
-		return null;
-
+		sesion = sessionFactory.openSession();
+		//Query query = sesion.getNamedQuery("Departamentos.findAll");
+		Query query = sesion.createQuery("Select u From AsClase u");
+		List<AsClase> asClase = query.list();
+		sesion.close();
+		return asClase;
 	}
 
-	public AsClase findByIdAsClase(String id) {
-
-		try {
-			iniciarSesion();
-			// Query query =
-			// s.getNamedQuery("AsClase.findByIdcTipoAtributo");
-			Query query = s
-					.createQuery("Select u from AsClase u where u.cClase =:id");
-			query.setParameter("id", id);
-			AsClase asClase = (AsClase) query
-					.uniqueResult();
-			return asClase;
-		} catch (Exception e) {
-			System.out.println("eroro  " + e);
-		}
-		return null;
-
-	}
-
-	private void iniciarTransaccion() {
-		sf = hu.getSf();
-		s = sf.openSession();
-		tx = s.beginTransaction();
-	}
-
-	private void finTransaccion() {
-		s.flush();
-		tx.commit();
-		s.close();
-	}
-
-	private void iniciarSesion() {
-		sf = hu.getSf();
-		s = sf.openSession();
-	}
-
-	private void finSesion() {
-		s.flush();
-		s.close();
-	}
-}
+	public AsClase findByIdAsClase(String nombre) {
+		sesion = sessionFactory.openSession();
+//		Query query = sesion.getNamedQuery("Departamentos.findByNombreDep");
+//		query.setParameter("nombreDep", nombre);
+		Query query = sesion.createQuery("Select u from AsClase u where u.cTipoAtributo =:idTipo");
+		query.setParameter("idTipo", nombre);
+		AsClase asClase = (AsClase) query.uniqueResult();
+		sesion.close();
+		return asClase;
+	}}

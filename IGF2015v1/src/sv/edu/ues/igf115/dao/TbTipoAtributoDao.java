@@ -2,116 +2,90 @@ package sv.edu.ues.igf115.dao;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import sv.edu.ues.igf115.model.TbTipoAtributo;
-import sv.edu.ues.igf115.utilidades.HibernateUtil;
+import sv.edu.ues.igf115.utilidades.HibernateUtils;
+
 
 public class TbTipoAtributoDao {
-	private HibernateUtil hu = new HibernateUtil();
-	private SessionFactory sf;
-	private Session s;
+	
+	private HibernateUtils hibernateUtil = new HibernateUtils() ;
+	private SessionFactory sessionFactory = hibernateUtil.getSessionFactory();
+	private Session sesion;
 	private Transaction tx;
-
-	public boolean guardar(TbTipoAtributo tbTipoAtributo) {
+	
+	private void iniciaOperacion() throws HibernateException {
+		sesion = sessionFactory.openSession() ;
+		tx = sesion.beginTransaction() ;
+		}
+	
+	private void manejaExcepcion(HibernateException he)
+			throws HibernateException {
+		tx.rollback();
+		throw new HibernateException("Ocurrió un error en la capa DAO", he);
+	} 
+	
+	public void guardar(TbTipoAtributo tbTipoAtributo) {
 		try {
-			iniciarTransaccion();
-			s.saveOrUpdate(tbTipoAtributo);
-			finTransaccion();
-			return true;
-		} catch (Exception e) {
-			System.err.println(this
-					+ "Ocurrio un error al guardar TbTipoAtributo "
-					+ e.getMessage());
-			return false;
+			iniciaOperacion();
+			sesion.saveOrUpdate(tbTipoAtributo);
+			tx.commit();
+			sesion.flush();
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		} finally {
+			sesion.close();
 		}
 	}
 
-	public boolean borrar(String cTipoAtributo) {
+
+		
+	public void eliminar(TbTipoAtributo tbTipoAtributo) {
 		try {
-			iniciarTransaccion();
-			TbTipoAtributo tbTipoAtributo = findByIdTbTipoAtributo(cTipoAtributo);
-			s.delete(tbTipoAtributo);
-			finTransaccion();
-			return true;
-		} catch (Exception e) {
-			System.err.println(this
-					+ "Ocurrio un error al borrar TbTipoAtributo "
-					+ e.getMessage());
-			return false;
+			iniciaOperacion();
+			sesion.delete(tbTipoAtributo);
+			tx.commit();
+			sesion.flush();
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		} finally {
+			sesion.close();
 		}
 	}
-
-	public boolean Actualizar(TbTipoAtributo tbTipoAtributo) {
-		try {
-			iniciarTransaccion();
-			s.saveOrUpdate(tbTipoAtributo);
-			finTransaccion();
-			return true;
-		} catch (Exception e) {
-			System.err.println(this
-					+ "Ocurrio un error al Actualizar TbTipoAtributo"
-					+ e.getMessage());
-			return false;
+	
+	public TbTipoAtributo daDepartamentoById(short idDep){
+		 sesion = sessionFactory.openSession() ;
+		 // Retorna la instancia persistente de la clase por medio del	atributo identidad
+		 TbTipoAtributo id = (TbTipoAtributo) sesion.get(TbTipoAtributo.class, new Short(idDep)) ;
+		 sesion.close() ;
+		 return id ;
 		}
-	}
-
+	
 	public List<TbTipoAtributo> findByAll() {
-		try {
-			iniciarSesion();
-			// Query query = s.getNamedQuery("TbTipoAtributo.findAll");
-			Query query = s.createQuery("Select u From TbTipoAtributo u");
-			List<TbTipoAtributo> lst = query.list();
-			finSesion();
-			return lst;
-		} catch (Exception e) {
-			System.out.println("Error TbTipoAtributoDao---findByAll " + e);
-		}
-		return null;
-
+		sesion = sessionFactory.openSession();
+		//Query query = sesion.getNamedQuery("Departamentos.findAll");
+		Query query = sesion.createQuery("Select u From TbTipoAtributo u");
+		List<TbTipoAtributo> tbTipoAtributo = query.list();
+		sesion.close();
+		return tbTipoAtributo;
 	}
 
-	public TbTipoAtributo findByIdTbTipoAtributo(String idTipo) {
-
-		try {
-			iniciarSesion();
-			// Query query =
-			// s.getNamedQuery("TbTipoAtributo.findByIdcTipoAtributo");
-			Query query = s
-					.createQuery("Select u from TbTipoAtributo u where u.cTipoAtributo =:idTipo");
-			query.setParameter("idTipo", idTipo);
-			TbTipoAtributo tbTipoAtributo = (TbTipoAtributo) query
-					.uniqueResult();
-			return tbTipoAtributo;
-		} catch (Exception e) {
-			System.out.println("eroro  " + e);
-		}
-		return null;
-
-	}
-
-	private void iniciarTransaccion() {
-		sf = hu.getSf();
-		s = sf.openSession();
-		tx = s.beginTransaction();
-	}
-
-	private void finTransaccion() {
-		s.flush();
-		tx.commit();
-		s.close();
-	}
-
-	private void iniciarSesion() {
-		sf = hu.getSf();
-		s = sf.openSession();
-	}
-
-	private void finSesion() {
-		s.flush();
-		s.close();
+	public TbTipoAtributo findByIdTbTipoAtributo(String nombre) {
+		sesion = sessionFactory.openSession();
+//		Query query = sesion.getNamedQuery("Departamentos.findByNombreDep");
+//		query.setParameter("nombreDep", nombre);
+		Query query = sesion.createQuery("Select u from TbTipoAtributo u where u.cTipoAtributo =:idTipo");
+		query.setParameter("idTipo", nombre);
+		TbTipoAtributo tbTipoAtributo = (TbTipoAtributo) query.uniqueResult();
+		sesion.close();
+		return tbTipoAtributo;
 	}
 }
+

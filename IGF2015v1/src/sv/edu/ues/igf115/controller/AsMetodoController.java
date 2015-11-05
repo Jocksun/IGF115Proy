@@ -48,7 +48,8 @@ public class AsMetodoController extends HttpServlet {
 		if (action.equalsIgnoreCase("delete")) {
 			
 			String userId = request.getParameter("userId");
-			dao.borrar(userId);
+			AsMetodo asMetodo= dao.findByIdAsMetodo(userId);
+			dao.eliminar(asMetodo);
 			forward = LIST_USER;
 			request.setAttribute("lst", dao.findByAll());
 			
