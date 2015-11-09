@@ -8,15 +8,23 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import sv.edu.ues.igf115.model.AsAtributo;
 import sv.edu.ues.igf115.utilidades.HibernateUtils;
 
+@Repository
 public class AsAtributoDao {
-	private HibernateUtils hibernateUtil = new HibernateUtils() ;
+	private HibernateUtils hibernateUtil;
 	private SessionFactory sessionFactory = hibernateUtil.getSessionFactory();
 	private Session sesion;
 	private Transaction tx;
+	
+	@Autowired
+	public AsAtributoDao(HibernateUtils hibernateUtil) {
+		this.hibernateUtil = hibernateUtil;
+	}
 
 	
 	private void iniciaOperacion() throws HibernateException {

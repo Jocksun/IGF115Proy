@@ -7,15 +7,25 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import sv.edu.ues.igf115.model.AsClase;
 import sv.edu.ues.igf115.utilidades.HibernateUtils;
 
+@Repository
 public class AsClaseDao {
 	
 	
 	
-	private HibernateUtils hibernateUtil = new HibernateUtils() ;
+	private HibernateUtils hibernateUtil ;
+	@Autowired
+	
+	public AsClaseDao(HibernateUtils hibernateUtil) {
+		this.hibernateUtil = hibernateUtil;
+	}
+
+
 	private SessionFactory sessionFactory = hibernateUtil.getSessionFactory();
 	private Session sesion;
 	private Transaction tx;

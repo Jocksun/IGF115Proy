@@ -11,9 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import sv.edu.ues.igf115.dao.TbTipoMetodoDao;
 import sv.edu.ues.igf115.model.TbTipoMetodo;
 
+@Transactional
+@Service
 public class TbTipoMetodoController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -22,9 +28,10 @@ public class TbTipoMetodoController extends HttpServlet {
 
 	private TbTipoMetodoDao dao;
 
-	public TbTipoMetodoController() {
-		super();
-		dao = new TbTipoMetodoDao();
+	
+   @Autowired
+	public TbTipoMetodoController(TbTipoMetodoDao dao) {
+		this.dao = dao;
 	}
 
 	protected void doGet(HttpServletRequest request,

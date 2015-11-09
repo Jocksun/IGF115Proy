@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import sv.edu.ues.igf115.dao.AsAtributoDao;
 import sv.edu.ues.igf115.dao.AsClaseDao;
 import sv.edu.ues.igf115.dao.AsMetodoDao;
@@ -19,8 +23,8 @@ import sv.edu.ues.igf115.model.AsClase;
 import sv.edu.ues.igf115.model.AsMetodo;
 import sv.edu.ues.igf115.model.TbTipoAtributo;
 
-
-
+@Transactional
+@Service
 public class AsAtributoController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -32,12 +36,13 @@ public class AsAtributoController extends HttpServlet {
 	private AsMetodoDao asMetodoDao;
 	private AsClaseDao asClaseDao;
 
-	public AsAtributoController() {
-		super();
-		dao = new AsAtributoDao();
-		tbTipoAtributoDao= new TbTipoAtributoDao();
-		asMetodoDao = new AsMetodoDao();
-		asClaseDao = new AsClaseDao();
+	@Autowired
+	public AsAtributoController(AsAtributoDao dao ) {
+
+		this.dao = dao;
+//		tbTipoAtributoDao= new TbTipoAtributoDao();
+//		asMetodoDao = new AsMetodoDao();
+//		asClaseDao = new AsClaseDao();
 	}
 
 	protected void doGet(HttpServletRequest request,

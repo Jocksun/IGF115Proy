@@ -1,10 +1,21 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@page import="sv.edu.ues.igf115.controller.*"%>
 <%@page import="sv.edu.ues.igf115.model.*"%>
 <%@page import="java.util.*"%>
+<%@page import="org.springframework.context.* , org.springframework.context.support.*, org.springframework.web.context.support.*" %>
+
+
+<%
+ApplicationContext context= WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
+TbTipoAtributoController tbTipoAtributoController=(TbTipoAtributoController) context.getBean("TbTipoAtributoController");
+
+List<TbTipoAtributo> list= tbTipoAtributoController.daTbTipoAtributos();
+%>
+
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -43,22 +54,21 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${lst}" var="user">
+					<c:forEach items="<%=list%>" var="user">
 						<tr>
 							<td><c:out value="${user.CTipoAtributo}" /></td>
 							<td><c:out value="${user.DTipoAtributo}" /></td>
 							<td><fmt:formatDate pattern="dd MMM,yyyy"
 									value="${user.FIngreso}" /></td>
 							<td><a
-								href="../TbTipoAtributoController?action=edit&userId=<c:out value="${user.CTipoAtributo}"/>">Update</a></td>
+								href="edit.jsp?userId=<c:out value="${user.CTipoAtributo}"/>">Update</a></td>
 							<td><a
-								href="../TbTipoAtributoController?action=delete&userId=<c:out value="${user.CTipoAtributo}"/>">Delete</a></td>
+								href="delete.jsp?userId=<c:out value="${user.CTipoAtributo}"/>">Delete</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-			<a href="../TbTipoAtributoController?action=insert" role="button"
-				class="btn btn-info btn-lg" data-toggle="modal">Agregar</a>
+		<p><a href="new.jsp">Agregar</a></p>
 		</div>
 		</section>
 	</div>

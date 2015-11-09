@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import sv.edu.ues.igf115.dao.AsClaseDao;
 import sv.edu.ues.igf115.dao.AsMetodoDao;
@@ -19,27 +23,32 @@ import sv.edu.ues.igf115.model.AsClase;
 import sv.edu.ues.igf115.model.AsMetodo;
 import sv.edu.ues.igf115.model.AsMetodoPK;
 import sv.edu.ues.igf115.model.TbTipoMetodo;
-
+@Transactional
+@Service
 public class AsMetodoController extends HttpServlet {
 
 	
 	private static final long serialVersionUID = 1L;
 	private static String INSERT_OR_EDIT = "/asmetodo/new.jsp";
 	private static String LIST_USER = "/asmetodo/asmetodo.jsp";
+	
 	private AsMetodoDao dao;
 	private AsClaseDao asClaseDao;
 	private TbTipoMetodoDao tbTipoMetodoDao;
 	private AsMetodoPKDao asMetodoPKDao;
 	
-	public AsMetodoController() {
-		super();
-		dao = new AsMetodoDao();
-		asClaseDao = new AsClaseDao();
-		tbTipoMetodoDao= new TbTipoMetodoDao();
-		asMetodoPKDao = new AsMetodoPKDao();
-		
+//	public AsMetodoController() {
+//		this.dao = dao;
+//		asClaseDao = new AsClaseDao();
+//		tbTipoMetodoDao= new TbTipoMetodoDao();
+//		asMetodoPKDao = new AsMetodoPKDao();
+//		
+//	}
+	@Autowired
+	public AsMetodoController(AsMetodoDao dao) {
+		this.dao = dao;
 	}
-	
+
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		
 		String forward = "";

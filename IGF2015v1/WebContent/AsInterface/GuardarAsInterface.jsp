@@ -7,21 +7,21 @@
 <%@ page import="java.math.BigDecimal"%>
 <%
    // int idd = Integer.parseInt(request.getParameter("idDep"));
-    int cInterface = Integer.parseInt(request.getParameter("cInterface"));
-    String dInterface = request.getParameter("dInterface");
-    String cUsuario = request.getParameter("cUsuario");
-    Date fIngreso = new Date(); //(request.getParameter("fIngreso"));
+//     int cInterface = Integer.parseInt(request.getParameter("cInterface"));
+//     String dInterface = request.getParameter("dInterface");
+//     String cUsuario = request.getParameter("cUsuario");
+//     Date fIngreso = new Date(); //(request.getParameter("fIngreso"));
     
-    AsInterfaceController ctrl = new AsInterfaceController();
-    boolean existe = ctrl.crearDepartamento(cInterface, dInterface,cUsuario,fIngreso);  
-    String mensaje;
+// //     AsInterfaceController ctrl = new AsInterfaceController();
+//     boolean existe = ctrl.crearDepartamento(cInterface, dInterface,cUsuario,fIngreso);  
+//     String mensaje;
     
-  	if (existe) {
-  		mensaje = "Se creo AsInterface";
-  	} else {
-  		response.sendRedirect("GuardarAsInterface.html");
-  		mensaje = "Error al guardar el AsInterface";
-  	}
+//   	if (existe) {
+//   		mensaje = "Se creo AsInterface";
+//   	} else {
+//   		response.sendRedirect("GuardarAsInterface.html");
+//   		mensaje = "Error al guardar el AsInterface";
+//   	}
     
     %>
     
@@ -33,6 +33,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%=mensaje %>
+<%-- <%=mensaje %> --%>
 </body>
 </html>

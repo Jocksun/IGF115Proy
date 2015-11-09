@@ -7,14 +7,23 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import sv.edu.ues.igf115.model.TbTipoAtributo;
 import sv.edu.ues.igf115.utilidades.HibernateUtils;
 
-
+@Repository
 public class TbTipoAtributoDao {
+
+	@Autowired
+	private HibernateUtils hibernateUtil ;
 	
-	private HibernateUtils hibernateUtil = new HibernateUtils() ;
+	@Autowired
+	public TbTipoAtributoDao(HibernateUtils hibernateUtil) {
+		this.hibernateUtil = hibernateUtil;
+	}
+
 	private SessionFactory sessionFactory = hibernateUtil.getSessionFactory();
 	private Session sesion;
 	private Transaction tx;
@@ -29,6 +38,7 @@ public class TbTipoAtributoDao {
 		tx.rollback();
 		throw new HibernateException("Ocurrió un error en la capa DAO", he);
 	} 
+	
 	
 	public void guardar(TbTipoAtributo tbTipoAtributo) {
 		try {

@@ -5,25 +5,25 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.math.BigDecimal"%>
 
-<%!String mensaje = "";%>
-<%
-	int agno = Integer.parseInt(request.getParameter("anyo"));
-	TbTipoAtributoController tb = new TbTipoAtributoController();
+<%-- <%!String mensaje = "";%> --%>
+<%-- <% --%>
+// 	int agno = Integer.parseInt(request.getParameter("anyo"));
+// 	TbTipoAtributoController tb = new TbTipoAtributoController();
 
-	List empleados = tb.findByAll();
-	int numeroEmpleados = empleados.size();
+// 	List empleados = tb.findByAll();
+// 	int numeroEmpleados = empleados.size();
 
-	if (empleados.isEmpty())
-		mensaje = "No Hay Empleados";
-	else {
-		TbTipoAtributo empActual;
-		for (int i = 0; i < numeroEmpleados; i++) {
-			empActual = (TbTipoAtributo) empleados.get(i);
-			mensaje += ("Nombre: " + empActual.getCTipoAtributo()
-					+ ", prueba " +empActual.getDTipoAtributo() +"<br>");
-		}
-	}
-%>
+// 	if (empleados.isEmpty())
+// 		mensaje = "No Hay Empleados";
+// 	else {
+// 		TbTipoAtributo empActual;
+// 		for (int i = 0; i < numeroEmpleados; i++) {
+// 			empActual = (TbTipoAtributo) empleados.get(i);
+// 			mensaje += ("Nombre: " + empActual.getCTipoAtributo()
+// 					+ ", prueba " +empActual.getDTipoAtributo() +"<br>");
+// 		}
+// 	}
+<%-- %> --%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,6 +31,6 @@
 <title>Consultar Empleados</title>
 </head>
 <body>
-	<%=mensaje%><br>
+<%-- 	<%=mensaje%><br> --%>
 </body>
 </html>

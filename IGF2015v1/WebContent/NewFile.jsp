@@ -6,16 +6,16 @@
 <%@ page import="java.util.Date" %>
 <%
 
-    TbTipoAtributo tipoAtributo = new TbTipoAtributo();
-	String disable="";
-    TbTipoAtributoController tb = new TbTipoAtributoController();
+//     TbTipoAtributo tipoAtributo = new TbTipoAtributo();
+// 	String disable="";
+//     TbTipoAtributoController tb = new TbTipoAtributoController();
 
-	String accion = request.getParameter("accion");
-	if (accion == null) accion = "";
+// 	String accion = request.getParameter("accion");
+// 	if (accion == null) accion = "";
 	
-	Integer ident = 0;
-	if (request.getParameter("idconcepto") == null) ident = 0;
-	else ident = Integer.parseInt(request.getParameter("idconcepto"));
+// 	Integer ident = 0;
+// 	if (request.getParameter("idconcepto") == null) ident = 0;
+// 	else ident = Integer.parseInt(request.getParameter("idconcepto"));
 	
 // 	if (ident == 0) {
 // 		tipoAtributo = new TbTipoAtributo();
