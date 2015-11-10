@@ -12,17 +12,6 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-
-	<servlet>
-		<servlet-name>TbTipoAtributoController</servlet-name>
-		<servlet-class>sv.edu.ues.igf115.controller.TbTipoAtributoController</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>TbTipoAtributoController</servlet-name>
-		<url-pattern>/TbTipoAtributoController</url-pattern>
-	</servlet-mapping>
-	
 	
 	<servlet>
 		<servlet-name>AsAtributoController</servlet-name>

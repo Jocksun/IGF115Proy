@@ -17,8 +17,8 @@ String mensaje;
 
 	if (crear != null && "on".equals(crear)) {
 		TbTipoAtributo tbTipoAtributo= new TbTipoAtributo();
-		tbTipoAtributo.setDTipoAtributo(request.getParameter("codigo"));
-		tbTipoAtributo.setCTipoAtributo(request.getParameter("descripcion"));
+		tbTipoAtributo.setCTipoAtributo(request.getParameter("codigo").trim());
+		tbTipoAtributo.setDTipoAtributo(request.getParameter("descripcion").trim());
 		
 		boolean existe = tbTipoAtributoController.crear(tbTipoAtributo);
 		if (existe) {

@@ -18,14 +18,14 @@ String crear = request.getParameter("crear");
 
 
 String mensaje;
-String id="";
+String id= request.getParameter("id");
 String isd="";
 String codigo="";
 String descripcion="";
 
 	if (crear != null && "yes".equals(crear)) {
-		id = request.getParameter("id");
-		tbTipoAtributo = tbTipoAtributoController.daTipoAtributoById(isd);
+
+		tbTipoAtributo = tbTipoAtributoController.daTipoAtributoById(id);
 		
 		boolean existe = tbTipoAtributoController.eliminar(tbTipoAtributo);
 		 
