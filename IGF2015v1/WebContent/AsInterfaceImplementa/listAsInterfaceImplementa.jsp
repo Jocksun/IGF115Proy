@@ -36,7 +36,7 @@ List<AsInterfaceImplementa> list= AsInterImplementsCtrol.daAsInterfaceImplementa
 <title>AsInterface</title>
 </head>
 <body>
-<h2>AsIterface</h2>
+<center><h2>AS_INTERFACE_IMPLEMENTA</h2></center>
 	<div class="wrap">
 		<section>
 		<div class="container">

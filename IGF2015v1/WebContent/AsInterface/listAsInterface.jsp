@@ -34,9 +34,10 @@ List<AsInterface> list= ctrlAsInter.daAsInterfaces();
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>AsInterface</title>
+
 </head>
 <body>
-<h2>AsIterface</h2>
+<center><h2>AS_INTERFACE</h2></center>
 	<div class="wrap">
 		<section>
 		<div class="container">

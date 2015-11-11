@@ -60,6 +60,12 @@ http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 		<constructor-arg ref="daoAsInter" />
 	</bean>
 	
+	<bean id="daoAsInterImplements" class="sv.edu.ues.igf115.dao.AsInterfaceImplementaDao">
+		<constructor-arg ref="hibernateUtil" />
+	</bean>
 	
+	<bean id="AsInterImplementsCtrol" class="sv.edu.ues.igf115.controller.AsInterfaceImplementaController">
+		<constructor-arg ref="daoAsInterImplements" />
+	</bean>
 	
 </beans>
