@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import java.util.List;
 
 
 @Entity
@@ -24,56 +25,64 @@ import javax.persistence.TemporalType;
 
 public class TbAplicativo implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "c_aplicativo", nullable = false, length = 5)
-    private String cAplicativo;
-    @Column(name = "d_aplicativo", length = 100)
-    private String dAplicativo;
-    @Column(name = "f_ingreso")
-    @Temporal(TemporalType.DATE)
-    private Date fIngreso;
+  //DECLARACIONES
+
+  	private String c_aplicativo;
+  	private String d_aplicativo;
+  	private Date f_ingreso;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cAplicativo")
     private Set<AsClase> asClaseSet;
 
     public TbAplicativo() {
-    }
+	}
 
-    public TbAplicativo(String cAplicativo) {
-        this.cAplicativo = cAplicativo;
-    }
+    //CLASE CONSTRUCTOR RECIBE PARAMETROS
+	public TbAplicativo(String c_aplicativo, String d_aplicativo, Date f_ingreso) {
+		this.c_aplicativo = c_aplicativo;
+		this.d_aplicativo = d_aplicativo;
+		this.f_ingreso = f_ingreso;
+	}
+	@Id
+	@Basic(optional = false)
+	@Column(name = "c_aplicativo")
+	public String getC_aplicativo() {
+		return c_aplicativo;
+	}
 
-    public String getCAplicativo() {
-        return cAplicativo;
-    }
+	public void setC_aplicativo(String c_aplicativo) {
+		this.c_aplicativo = c_aplicativo;
+	}
+	
+	@Basic(optional = false)
+	@Column(name = "d_aplicativo")
+	public String getD_aplicativo() {
+		return d_aplicativo;
+	}
 
-    public void setCAplicativo(String cAplicativo) {
-        this.cAplicativo = cAplicativo;
-    }
+	public void setD_aplicativo(String d_aplicativo) {
+		this.d_aplicativo = d_aplicativo;
+	}
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "f_ingreso", length = 10)
+	public Date getF_ingreso() {
+		return this.f_ingreso;
+	}
 
-    public String getDAplicativo() {
-        return dAplicativo;
-    }
-
-    public void setDAplicativo(String dAplicativo) {
-        this.dAplicativo = dAplicativo;
-    }
-
-    public Date getFIngreso() {
-        return fIngreso;
-    }
-
-    public void setFIngreso(Date fIngreso) {
-        this.fIngreso = fIngreso;
-    }
-
+	public void setF_ingreso(Date f_ingreso) {
+		this.f_ingreso = f_ingreso;
+	}
+	/*
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "c_tipo_clase")
     public Set<AsClase> getAsClaseSet() {
         return asClaseSet;
     }
-
+	
     public void setAsClaseSet(Set<AsClase> asClaseSet) {
         this.asClaseSet = asClaseSet;
     }
+*/
 
   
     

@@ -18,54 +18,59 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "as_interface_implementa", catalog = "mydb", schema = "")
-
 public class AsInterfaceImplementa implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "c_interface_implementa", nullable = false)
-    private Integer cInterfaceImplementa;
-    @JoinColumn(name = "c_interface_padre", referencedColumnName = "c_interface", nullable = false)
-    @ManyToOne(optional = false)
-    private AsInterface cInterfacePadre;
-    @JoinColumn(name = "c_interface_hijo", referencedColumnName = "c_interface", nullable = false)
-    @ManyToOne(optional = false)
-    private AsInterface cInterfaceHijo;
 
-    public AsInterfaceImplementa() {
-    }
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "c_interface_implementa", nullable = false)
+	private Integer cInterfaceImplementa;
+	@JoinColumn(name = "c_interface_padre", referencedColumnName = "c_interface", nullable = false)
+	@ManyToOne(optional = false)
+	private AsInterface cInterfacePadre;
+	@JoinColumn(name = "c_interface_hijo", referencedColumnName = "c_interface", nullable = false)
+	@ManyToOne(optional = false)
+	private AsInterface cInterfaceHijo;
 
-    public AsInterfaceImplementa(Integer cInterfaceImplementa) {
-        this.cInterfaceImplementa = cInterfaceImplementa;
-    }
+	AsInterfaceImplementa() {
+	}
 
-    public Integer getCInterfaceImplementa() {
-        return cInterfaceImplementa;
-    }
+	public AsInterfaceImplementa(Integer cInterfaceImplementa,
+			AsInterface cInterfacePadre, AsInterface cInterfaceHijo) {
+		this.cInterfaceImplementa = cInterfaceImplementa;
+		this.cInterfacePadre = cInterfacePadre;
+		this.cInterfaceHijo = cInterfaceHijo;
+	}
 
-    public void setCInterfaceImplementa(Integer cInterfaceImplementa) {
-        this.cInterfaceImplementa = cInterfaceImplementa;
-    }
+	public AsInterfaceImplementa(Integer cInterfaceImplementa) {
+		this.cInterfaceImplementa = cInterfaceImplementa;
+	}
 
-    public AsInterface getCInterfacePadre() {
-        return cInterfacePadre;
-    }
+	public Integer getCInterfaceImplementa() {
+		return cInterfaceImplementa;
+	}
 
-    public void setCInterfacePadre(AsInterface cInterfacePadre) {
-        this.cInterfacePadre = cInterfacePadre;
-    }
+	public void setCInterfaceImplementa(Integer cInterfaceImplementa) {
+		this.cInterfaceImplementa = cInterfaceImplementa;
+	}
 
-    public AsInterface getCInterfaceHijo() {
-        return cInterfaceHijo;
-    }
+	public AsInterface getCInterfacePadre() {
+		return cInterfacePadre;
+	}
 
-    public void setCInterfaceHijo(AsInterface cInterfaceHijo) {
-        this.cInterfaceHijo = cInterfaceHijo;
-    }
+	public void setCInterfacePadre(AsInterface cInterfacePadre) {
+		this.cInterfacePadre = cInterfacePadre;
+	}
 
-   
+	public AsInterface getCInterfaceHijo() {
+		return cInterfaceHijo;
+	}
+
+	public void setCInterfaceHijo(AsInterface cInterfaceHijo) {
+		this.cInterfaceHijo = cInterfaceHijo;
+	}
+
 }
