@@ -51,7 +51,7 @@ public class AsAtributoController extends HttpServlet {
 		String action = request.getParameter("action");
 
 		if (action.equalsIgnoreCase("delete")) {
-			String userId = request.getParameter("userId");
+			Integer userId = Integer.parseInt(request.getParameter("userId"));
 			AsAtributo asAtributo=dao.findByIdAsAtributo(userId);
 			dao.borrar(asAtributo);
 			forward = LIST_USER;
@@ -59,7 +59,7 @@ public class AsAtributoController extends HttpServlet {
 		} else if (action.equalsIgnoreCase("edit")) {
 			try {
 				forward = INSERT_OR_EDIT;
-				String userId = request.getParameter("userId");
+				Integer userId = Integer.parseInt(request.getParameter("userId"));
 				AsAtributo asAtributo = dao.findByIdAsAtributo(userId);
 				request.setAttribute("AsAtributo", asAtributo);
 				
