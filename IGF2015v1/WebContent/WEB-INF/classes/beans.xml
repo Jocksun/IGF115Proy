@@ -27,4 +27,15 @@ http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	<bean id="ctrlAsInter" class="sv.edu.ues.igf115.controller.CtrlAsInterface">
 		<constructor-arg ref="daoAsInter" />
 	</bean>
+	
+	
+	<!-- INICIA PARTE JOCKSUN -->	
+	<bean id="daoDepto" class="sv.edu.ues.igf115.dao.TbTipoClaseDao">
+		<constructor-arg ref="hibernateUtil" />
+	</bean>
+	
+	<bean id="ctrlDepto" class="sv.edu.ues.igf115.controller.TbTipoClaseController">
+		<constructor-arg ref="daoDepto" />
+	</bean>
+	<!-- FIN PARTE JOCKSUN -->	
 </beans>
