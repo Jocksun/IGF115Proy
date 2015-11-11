@@ -76,9 +76,8 @@ private HibernateUtils hibernateUtil;
 		try {
 
 			sesion = sessionFactory.openSession();
-			//Query query = sesion.getNamedQuery("   Departamentos.findByNombreDep");
-			Query query= sesion.createQuery("Select dep from AsInterfaceImplementa dep where dep.d_interface=:d_interface");
-			query.setParameter("d_interface", nombre);
+			Query query= sesion.createQuery("Select dep from AsInterfaceImplementa dep where dep.cInterfaceImplementa=:cInterfaceImplementa");
+			query.setParameter("cInterfaceImplementa", nombre);
 			AsInterfaceImplementa asInterImplementa = (AsInterfaceImplementa) query.uniqueResult();
 			sesion.close();
 			return asInterImplementa;	

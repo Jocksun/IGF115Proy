@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import sv.edu.ues.igf115.model.AsClase;
 import sv.edu.ues.igf115.model.AsInterface;
 
 import sv.edu.ues.igf115.utilidades.HibernateUtils;
@@ -126,6 +127,12 @@ public class AsInterfaceDao {
 		return false;
 	}
 
-
+	public List<AsInterface> findByAll() {
+		sesion = sessionFactory.openSession();
+		Query query = sesion.createQuery("Select u From AsInterface u");
+		List<AsInterface> asInterface = query.list();
+		sesion.close();
+		return asInterface;
+	}
 
 }

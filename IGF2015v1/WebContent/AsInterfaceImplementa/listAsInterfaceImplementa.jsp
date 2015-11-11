@@ -58,14 +58,14 @@ List<AsInterfaceImplementa> list= AsInterImplementsCtrol.daAsInterfaceImplementa
                     		<td><c:out value="${AsInterfaceImplementa.CInterfaceHijo.c_interface}" /></td>
                     		<td><c:out value="${AsInterfaceImplementa.CInterfacePadre.c_interface}" /></td>
                     
-                    		<td><a href="editAsInterface.jsp?userId=<c:out value="${AsInterfaceImplementa.CInterfaceImplementa}"/>">Modificar</a></td>      
-                    		<td><a href="deleteAsInterface.jsp?userId=<c:out value="${AsInterfaceImplementa.CInterfaceImplementa}"/>">Eliminar</a></td>
+                    		<td><a href="editAsInterfaceImplementa.jsp?userId=<c:out value="${AsInterfaceImplementa.CInterfaceImplementa}"/>">Modificar</a></td>      
+                    		<td><a href="deleteAsInterfaceImplementa.jsp?userId=<c:out value="${AsInterfaceImplementa.CInterfaceImplementa}"/>">Eliminar</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		<center> 
-		<input type="button" value="Crear Nuevo" onClick="location.href='nuevoAsInterface.jsp'" />
+		<input type="button" value="Crear Nuevo" onClick="location.href='nuevoAsInterfaceImplementa.jsp'" />
 		</center> 
 		</div>
 		</section>

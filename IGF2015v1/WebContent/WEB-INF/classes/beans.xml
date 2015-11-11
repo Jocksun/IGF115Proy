@@ -67,5 +67,30 @@ http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	<bean id="AsInterImplementsCtrol" class="sv.edu.ues.igf115.controller.AsInterfaceImplementaController">
 		<constructor-arg ref="daoAsInterImplements" />
 	</bean>
+		<bean id="daoDepto" class="sv.edu.ues.igf115.dao.TbTipoClaseDao">
+		<constructor-arg ref="hibernateUtil" />
+	</bean>
+	
+	<bean id="ctrlDepto" class="sv.edu.ues.igf115.controller.TbTipoClaseController">
+		<constructor-arg ref="daoDepto" />
+	</bean>
+	
+	<bean id="daoApli" class="sv.edu.ues.igf115.dao.TbAplicativoDao">
+		<constructor-arg ref="hibernateUtil" />
+	</bean>
+	
+	<bean id="ctrlApli" class="sv.edu.ues.igf115.controller.TbAplicativoController">
+		<constructor-arg ref="daoApli" />
+	</bean>
+	
+	<bean id="AsClaseInterfaceDao" class="sv.edu.ues.igf115.dao.AsClaseInterfaceDao">
+		<constructor-arg ref="hibernateUtil" />
+	</bean>
+	
+	<bean id="AsClaseInterfaceController" class="sv.edu.ues.igf115.controller.AsClaseInterfaceController">
+		<constructor-arg ref="AsClaseInterfaceDao" />
+		<constructor-arg ref="AsClaseDao" />
+		<constructor-arg ref="daoAsInter" />
+	</bean>
 	
 </beans>

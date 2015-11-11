@@ -21,7 +21,8 @@ import javax.persistence.Table;
 @Table(name = "as_clase_interface", catalog = "mydb", schema = "")
 
 public class AsClaseInterface implements Serializable {
-    private static final long serialVersionUID = 1L;
+ 
+	private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -29,17 +30,20 @@ public class AsClaseInterface implements Serializable {
     private Integer cClaseInterface;
     @JoinColumn(name = "c_interface", referencedColumnName = "c_interface", nullable = false)
     @ManyToOne(optional = false)
-    private AsInterface cInterface;
+    private Integer  cInterface;
     @JoinColumn(name = "c_clase", referencedColumnName = "c_clase", nullable = false)
     @ManyToOne(optional = false)
-    private AsClase cClase;
+    private Integer cClase;
 
     public AsClaseInterface() {
     }
 
-    public AsClaseInterface(Integer cClaseInterface) {
-        this.cClaseInterface = cClaseInterface;
-    }
+    public AsClaseInterface(Integer cClaseInterface, Integer cInterface,Integer cClase) {
+ 		this.cClaseInterface = cClaseInterface;
+ 		this.cInterface = cInterface;
+ 		this.cClase = cClase;
+ 	}
+
 
     public Integer getCClaseInterface() {
         return cClaseInterface;
@@ -49,19 +53,19 @@ public class AsClaseInterface implements Serializable {
         this.cClaseInterface = cClaseInterface;
     }
 
-    public AsInterface getCInterface() {
+    public Integer getCInterface() {
         return cInterface;
     }
 
-    public void setCInterface(AsInterface cInterface) {
+    public void setCInterface(Integer cInterface) {
         this.cInterface = cInterface;
     }
 
-    public AsClase getCClase() {
+    public Integer  getCClase() {
         return cClase;
     }
 
-    public void setCClase(AsClase cClase) {
+    public void setCClase(Integer cClase) {
         this.cClase = cClase;
     }
 
