@@ -6,7 +6,7 @@
 <%@page import="sv.edu.ues.igf115.model.*"%>
 <%@page import="java.util.*"%>
 <%@page import="org.springframework.context.* , org.springframework.context.support.*, org.springframework.web.context.support.*" %>
-
+ 
 <%
 ApplicationContext context= WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
 AsAtributoController asAtributoController=(AsAtributoController) context.getBean("AsAtributoController");
@@ -14,37 +14,36 @@ AsAtributoController asAtributoController=(AsAtributoController) context.getBean
 String crear = request.getParameter("crear");
 
 String mensaje;
+	AsAtributo asAtributo= null;	
+	Integer id=null;
+	Integer isd= null;
 
-	if (crear != null && "on".equals(crear)) {
-		
-		AsAtributo asAtributo= new AsAtributo();
-		
-		asAtributo.setCAtributo(Integer.parseInt(request.getParameter("codigoAtributo")));
-		asAtributo.setCClase(Integer.parseInt(request.getParameter("clase")));
-		asAtributo.setCMetodo(Integer.parseInt(request.getParameter("metodoid")));		
-		asAtributo.setCTipoAtributo(request.getParameter("codTipoAtrib"));
-		asAtributo.setCUsuario(request.getParameter("usuario"));
-		asAtributo.setDAtributo(request.getParameter("descripcioAtrib"));
-		asAtributo.setDTipoDatoAtributo(request.getParameter("descripcionTipoDatoAtr"));
-		
-		
-		boolean existe = asAtributoController.crear(asAtributo);
-		if (existe) {
-			response.sendRedirect("asatributo.jsp");
-			mensaje = "Se creo el  departamento";
+
+		if (crear != null && "on".equals(crear)) {
+			id = Integer.parseInt(request.getParameter("clase"));		
+			asAtributo = asAtributoController.daAsAtributoById(id);
+			asAtributo.setCAtributo(Integer.parseInt(request.getParameter("codigoAtributo")));
+			asAtributo.setCMetodo(Integer.parseInt(request.getParameter("metodoid")));		
+			asAtributo.setCTipoAtributo(request.getParameter("codTipoAtrib"));
+			asAtributo.setCUsuario(request.getParameter("usuario"));
+			asAtributo.setDAtributo(request.getParameter("descripcioAtrib"));
+			asAtributo.setDTipoDatoAtributo(request.getParameter("descripcionTipoDatoAtr"));
+			
+			boolean existe = asAtributoController.update(asAtributo);
+			if (existe) {
+				response.sendRedirect("asatributo.jsp");
+				mensaje = "Se creo el  departamento";
+			} else {
+				response.sendRedirect("edit.jsp?userId=<c:out value="+id+"");
+				mensaje = "Error al guardar el TbTipoAtributo";
+			}
 		} else {
-			response.sendRedirect("new.jsp");
-			mensaje = "Error al guardar el TbTipoAtributo";
+			isd = Integer.parseInt(request.getParameter("userId"));
+			asAtributo = asAtributoController.daAsAtributoById(isd);
+			request.setAttribute("AsAtributo", asAtributo);
+			
 		}
-	} 
-	else{
-		
-		List<AsMetodo> lstMetodo= asAtributoController.daAsMetodo();
-		request.setAttribute("lstMetodo", lstMetodo);
-		List<TbTipoAtributo> lstAtributo= asAtributoController.daTipoAtributo();
-		request.setAttribute("lstAtributo", lstAtributo);
-		
-	}
+	
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -62,15 +61,15 @@ String mensaje;
 </head>
 <body>
 	<div class="container">
-		<form method="POST" action='new.jsp'
+		<form method="POST" action='edit.jsp'
 			name="frmAddAsAtributo" role="form">
 
 					
-			<div class="form-group">
+			<div class="form-group" >
 				<label for="clase">Codigo Clase: <input
 					class="form-control" type="number" id="clase"
-					name="clase"
-					value="" />
+					name="clase" readonly="readonly"
+					value="<%=isd %>" />
 				</label>
 			</div>
 
@@ -124,8 +123,9 @@ String mensaje;
 				</select>
 				</label>
 			</div>
+			
 				<input type="hidden" name="crear" value="on"/>
-			 	<input type="submit" value="Agregar"/>
+			 	<input type="submit" value="editar"/>
 		</form>
 	</div>
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>

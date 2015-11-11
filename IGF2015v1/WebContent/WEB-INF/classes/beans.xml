@@ -8,6 +8,7 @@ http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	
 	<!-- Definition for hibernateUtil bean -->
+
 	
 	<bean id="hibernateUtil" class="sv.edu.ues.igf115.utilidades.HibernateUtils" />
 	<!-- Definicion de bean para DAO y Servicio utilizados por la Clase Departamento -->
@@ -15,16 +16,43 @@ http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	<bean id="TbTipoAtributoDao" class="sv.edu.ues.igf115.dao.TbTipoAtributoDao">
 		<constructor-arg ref="hibernateUtil" />
 	</bean>
-
+	
 	<bean id="TbTipoAtributoController" class="sv.edu.ues.igf115.controller.TbTipoAtributoController">
 		<constructor-arg ref="TbTipoAtributoDao" />
 	</bean>
-	
-		<bean id="daoAsInter" class="sv.edu.ues.igf115.dao.AsInterfaceDao">
+
+	<bean id="AsAtributoDao" class="sv.edu.ues.igf115.dao.AsAtributoDao">
 		<constructor-arg ref="hibernateUtil" />
 	</bean>
 	
-	<bean id="ctrlAsInter" class="sv.edu.ues.igf115.controller.CtrlAsInterface">
-		<constructor-arg ref="daoAsInter" />
+	<bean id="AsAtributoController" class="sv.edu.ues.igf115.controller.AsAtributoController">
+		<constructor-arg ref="AsAtributoDao" />
+		<constructor-arg ref="AsClaseDao" />
+		<constructor-arg ref="TbTipoAtributoDao" />
+		<constructor-arg ref="AsMetodoDao" />
 	</bean>
+	
+	<bean id="AsClaseDao" class="sv.edu.ues.igf115.dao.AsClaseDao">
+		<constructor-arg ref="hibernateUtil" />
+	</bean>
+	<bean id="AsClaseController" class="sv.edu.ues.igf115.controller.AsClaseController">
+		<constructor-arg ref="AsClaseDao" />
+	</bean>
+	
+	<bean id="AsMetodoDao" class="sv.edu.ues.igf115.dao.AsMetodoDao">
+		<constructor-arg ref="hibernateUtil" />
+	</bean>
+	<bean id="AsMetodoController" class="sv.edu.ues.igf115.controller.AsMetodoController">
+		<constructor-arg ref="AsMetodoDao" />
+	</bean>
+	
+	<bean id="TbTipoMetodoDao" class="sv.edu.ues.igf115.dao.TbTipoMetodoDao">
+		<constructor-arg ref="hibernateUtil" />
+	</bean>
+	<bean id="TbTipoMetodoController" class="sv.edu.ues.igf115.controller.TbTipoMetodoController">
+		<constructor-arg ref="TbTipoMetodoDao" />
+	</bean>
+	
+	
+	
 </beans>

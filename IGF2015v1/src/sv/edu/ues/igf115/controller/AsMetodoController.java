@@ -123,4 +123,9 @@ public class AsMetodoController extends HttpServlet {
 		request.setAttribute("lst", dao.findByAll());
 		view.forward(request, response);
 	}
+	
+	
+	public List<AsMetodo> daAsMetodo() {
+		return dao.findByAll();
+	}
 }

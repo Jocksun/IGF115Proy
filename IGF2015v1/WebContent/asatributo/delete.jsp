@@ -9,41 +9,39 @@
 
 <%
 ApplicationContext context= WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
-TbTipoAtributoController tbTipoAtributoController=(TbTipoAtributoController) context.getBean("TbTipoAtributoController");
+AsAtributoController asAtributoController=(AsAtributoController) context.getBean("AsAtributoController");
 
 
-TbTipoAtributo tbTipoAtributo = null ;
+AsAtributo asAtributo= null;	
 
 String crear = request.getParameter("crear");
 
 
 String mensaje;
-String id= request.getParameter("id");
-String isd="";
-String codigo="";
-String descripcion="";
+Integer id= (request.getParameter("id")!=null)? Integer.parseInt(request.getParameter("id")):null ;
+Integer isd=null;
+
 
 	if (crear != null && "yes".equals(crear)) {
-
-		tbTipoAtributo = tbTipoAtributoController.daTipoAtributoById(id);
-		
-		boolean existe = tbTipoAtributoController.eliminar(tbTipoAtributo);
+		asAtributo = asAtributoController.daAsAtributoById(id);		
+		boolean existe = asAtributoController.eliminar(asAtributo);
 		 
 		if (existe) {
-			response.sendRedirect("atributos.jsp");
+			response.sendRedirect("asatributo.jsp");
 			mensaje = "Se creo el  departamento";
 		} else {
-			response.sendRedirect("atributos.jsp");
+			response.sendRedirect("asatributo.jsp");
 			mensaje = "Error al guardar el cliente";
 		}
 	} else if (crear != null && "no".equals(crear)) {
-		response.sendRedirect("atributos.jsp");
+		response.sendRedirect("asatributo.jsp");
 		
 	}else{
-		isd = request.getParameter("userId");
-		tbTipoAtributo = tbTipoAtributoController.daTipoAtributoById(isd);
-		codigo = tbTipoAtributo.getCTipoAtributo();
-		descripcion = tbTipoAtributo.getDTipoAtributo();
+		isd = Integer.parseInt(request.getParameter("userId"));
+		asAtributo = asAtributoController.daAsAtributoById(isd);
+		request.setAttribute("asAtributo", asAtributo);
+		
+	
 	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -74,22 +72,49 @@ String descripcion="";
 			<label for="lab"> Seguro que desea eliminar el registro </label>
 
 
-			<div class="form-group">
-				<label for="personid"> Codigo Atributo: 
-				<c:out value="<%=tbTipoAtributo.getCTipoAtributo()%>"  />
-				</label>
-			</div>
-			<div class="form-group">
-				<label for="name"> Descripcion Atributo:
-				<c:out value="<%=tbTipoAtributo.getDTipoAtributo()%>"  />
-				</label>
-			</div>
 			
-			<div class="form-group">
-				<label for="name"> Fecha de Ingreso:
-				<c:out value="<%=tbTipoAtributo.getFIngreso()%>"  />
+			<div class="form-group" >
+				<label for="clase">Codigo Clase: 	
+				<c:out value="<%=asAtributo.getCClase()%>"/>
 				</label>
 			</div>
+
+			<div class="form-group">
+				<label for="codigoAtributo"> Codigo Atributo:
+				  <c:out value="<%=asAtributo.getCAtributo()%>"/>
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label for="metodoid"> Codigo Metodo: 
+				  <c:out value="<%=asAtributo.getCMetodo()%>"/>
+				</label>
+			</div>
+			<div class="form-group">
+				<label for="descripcioAtrib"> Descripcion Atributo: <c:out
+						value="<%=asAtributo.getDAtributo()%>" />
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label for="descripcionTipoDatoAtr"> Descripcion Tipo Dato
+					Atributo:
+					<c:out value="<%=asAtributo.getDTipoDatoAtributo()%>"/>
+				</label>
+			</div>
+			<div class="form-group">
+				<label for="usuario"> Usuario:
+				<c:out value="<%=asAtributo.getCUsuario()%>"/>
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label for="codTipoAtrib"> Codigo Tipo Atributo:
+				<c:out value="<%=asAtributo.getCTipoAtributo()%>"/>
+				</label>
+			</div>
+		
+			
 			
 			<td></td>
 			
