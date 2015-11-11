@@ -14,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "as_interface", catalog = "planilla", schema = "")
+@Table(name = "as_interface", catalog = "mydb", schema = "")
 public class AsInterface implements Serializable{
 	private static final long serialVersionUID = 1L;	
 	@Id
