@@ -52,6 +52,13 @@ http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	<bean id="TbTipoMetodoController" class="sv.edu.ues.igf115.controller.TbTipoMetodoController">
 		<constructor-arg ref="TbTipoMetodoDao" />
 	</bean>
+	<bean id="daoAsInter" class="sv.edu.ues.igf115.dao.AsInterfaceDao">
+		<constructor-arg ref="hibernateUtil" />
+	</bean>
+	
+	<bean id="ctrlAsInter" class="sv.edu.ues.igf115.controller.CtrlAsInterface">
+		<constructor-arg ref="daoAsInter" />
+	</bean>
 	
 	
 	
