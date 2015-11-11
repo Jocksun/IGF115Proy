@@ -84,7 +84,7 @@ public class AsAtributoDao {
 		return asAtributo;
 	}
 
-	public AsAtributo findByIdAsAtributo(String nombre) {
+	public AsAtributo findByIdAsAtributo(Integer nombre) {
 		sesion = sessionFactory.openSession();
 //		Query query = sesion.getNamedQuery("Departamentos.findByNombreDep");
 //		query.setParameter("nombreDep", nombre);

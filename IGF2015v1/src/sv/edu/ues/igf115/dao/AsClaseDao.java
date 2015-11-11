@@ -17,7 +17,7 @@ import sv.edu.ues.igf115.utilidades.HibernateUtils;
 public class AsClaseDao {
 	
 	
-	
+	@Autowired
 	private HibernateUtils hibernateUtil ;
 	@Autowired
 	
