@@ -90,11 +90,11 @@ public class AsClaseDao {
 		return asClase;
 	}
 
-	public AsClase findByIdAsClase(String nombre) {
+	public AsClase findByIdAsClase(Integer nombre) {
 		sesion = sessionFactory.openSession();
 //		Query query = sesion.getNamedQuery("Departamentos.findByNombreDep");
 //		query.setParameter("nombreDep", nombre);
-		Query query = sesion.createQuery("Select u from AsClase u where u.cTipoAtributo =:idTipo");
+		Query query = sesion.createQuery("Select u from AsClase u where u.cClase =:idTipo");
 		query.setParameter("idTipo", nombre);
 		AsClase asClase = (AsClase) query.uniqueResult();
 		sesion.close();

@@ -15,12 +15,15 @@ TbTipoMetodoController tbTipoMetodoController=(TbTipoMetodoController) context.g
 String crear = request.getParameter("crear");
 
 String mensaje;
+TbTipoMetodo tbTipoMetodo= new TbTipoMetodo();	
+String id="";
+String isd= "";
 
 	if (crear != null && "on".equals(crear)) {
 		
-		TbTipoMetodo tbTipoMetodo= new TbTipoMetodo();
 		
-		tbTipoMetodo.setCTipoMetodo(request.getParameter("ctipometodo"));
+		id = request.getParameter("ctipometodo");
+		tbTipoMetodo=tbTipoMetodoController.daTbTipoMetodoById(id);		
 		tbTipoMetodo.setDTipoMetodo(request.getParameter("dtipometodo"));
 		
 		boolean existe = tbTipoMetodoController.crear(tbTipoMetodo);
@@ -31,7 +34,10 @@ String mensaje;
 			response.sendRedirect("new.jsp");
 			mensaje = "Error al guardar el TbTipoAtributo";
 		}
-	} 
+	}else{
+		isd = request.getParameter("userId");
+		request.setAttribute("TbTipoMetodo", tbTipoMetodoController.daTbTipoMetodoById(isd));
+	}
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -49,12 +55,12 @@ String mensaje;
 </head>
 <body>
 	<div class="container">
-		<form method="POST" action='new.jsp'
+		<form method="POST" action='edit.jsp'
 			name="frmAddAtributo" role="form">
 
 			<div class="form-group">
-				<label for="personid"> Codigo Tipo Metodo: <input maxlength="1"
-					class="form-control" id="ctipometodo" name="ctipometodo"
+				<label for="personid"> Codigo Tipo Metodo: <input
+					class="form-control" id="ctipometodo" name="ctipometodo" readonly="readonly"
 					value=<c:out value="${TbTipoMetodo.CTipoMetodo}" /> />
 				</label>
 			</div>
@@ -65,7 +71,7 @@ String mensaje;
 				</label>
 			</div>
 				<input type="hidden" name="crear" value="on"/>
-			 	<input type="submit" value="Agregar"/>
+			 	<input type="submit" value="editar"/>
 		</form>
 	</div>
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>

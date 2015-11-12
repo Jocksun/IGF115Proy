@@ -1,10 +1,20 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@page import="sv.edu.ues.igf115.controller.*"%>
 <%@page import="sv.edu.ues.igf115.model.*"%>
 <%@page import="java.util.*"%>
+<%@page import="org.springframework.context.* , org.springframework.context.support.*, org.springframework.web.context.support.*" %>
+
+<%
+ApplicationContext context= WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
+AsMetodoController asMetodoController=(AsMetodoController) context.getBean("AsMetodoController");
+
+request.setAttribute("lst", asMetodoController.daAsMetodo());
+
+%>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -63,15 +73,16 @@
 						    <td><c:out value="${user.CTipoMetodo.CTipoMetodo}" /></td>
 						   
 							<td><a
-								href="../AsMetodoController?action=edit&userId=<c:out value="${user.asMetodoPK.CMetodo}"/>">Update</a></td>
+							    href="edit.jsp?userId=<c:out value="${user.asMetodoPK.CMetodo}"/>">Update</a></td>
+							
 							<td><a
-								href="../AsMetodoController?action=delete&userId=<c:out value="${user.asMetodoPK.CMetodo}"/>">Delete</a></td>
+								href="delete.jsp?userId=<c:out value="${user.asMetodoPK.CMetodo}"/>">Delete</a></td>
+						
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-			<a href="../AsMetodoController?action=insert" role="button"
-				class="btn btn-info btn-lg" data-toggle="modal">Agregar</a>
+		<p><a href="new.jsp">Agregar</a></p>
 		</div>
 		</section>
 	</div>

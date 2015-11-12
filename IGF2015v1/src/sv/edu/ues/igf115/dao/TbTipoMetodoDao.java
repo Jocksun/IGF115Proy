@@ -95,7 +95,7 @@ public class TbTipoMetodoDao {
 			sesion = sessionFactory.openSession();
 //			Query query = sesion.getNamedQuery("Departamentos.findByNombreDep");
 //			query.setParameter("nombreDep", nombre);
-			Query query = sesion.createQuery("Select u from TbTipoMetodo u where u.cTipoAtributo =:idTipo");
+			Query query = sesion.createQuery("Select u from TbTipoMetodo u where u.cTipoMetodo =:idTipo");
 			query.setParameter("idTipo", nombre);
 			TbTipoMetodo tbTipoMetodo = (TbTipoMetodo) query.uniqueResult();
 			sesion.close();

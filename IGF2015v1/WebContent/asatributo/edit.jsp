@@ -14,7 +14,7 @@ AsAtributoController asAtributoController=(AsAtributoController) context.getBean
 String crear = request.getParameter("crear");
 
 String mensaje;
-	AsAtributo asAtributo= null;	
+	AsAtributo asAtributo= new AsAtributo();	
 	Integer id=null;
 	Integer isd= null;
 

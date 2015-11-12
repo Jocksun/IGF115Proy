@@ -86,16 +86,22 @@ public class AsMetodoPKDao {
 		return asMetodoPK;
 	}
 
-	public AsMetodoPK findByIdAsMetodoPK(String nombre) {
+	public AsMetodoPK findByIdAsMetodoPK(Integer nombre) {
 		sesion = sessionFactory.openSession();
 //		Query query = sesion.getNamedQuery("Departamentos.findByNombreDep");
 //		query.setParameter("nombreDep", nombre);
-		Query query = sesion.createQuery("Select u from AsMetodoPK u where u.cTipoAtributo =:idTipo");
+		Query query = sesion.createQuery("Select u from AsMetodoPK u where u.c_clase =:idTipo");
 		query.setParameter("idTipo", nombre);
 		AsMetodoPK asMetodoPK = (AsMetodoPK) query.uniqueResult();
 		sesion.close();
 		return asMetodoPK;
 	}
 
+	public AsMetodoPK daAsMetodoPK(AsMetodoPK asMetodoPK) {
+		guardar(asMetodoPK);
+
+		return findByIdAsMetodoPK(asMetodoPK.getCClase());
+
+	}
 
 }
