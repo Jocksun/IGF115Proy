@@ -57,7 +57,7 @@
 		<mapping class="sv.edu.ues.igf115.model.TbTipoAtributo" />
 		<mapping class="sv.edu.ues.igf115.model.TbTipoClase" />
 		<mapping class="sv.edu.ues.igf115.model.TbTipoMetodo" />
-		<mapping class="sv.edu.ues.igf115.model.Users" />
+
 
 
 	</session-factory>

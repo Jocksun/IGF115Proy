@@ -18,12 +18,12 @@ import sv.edu.ues.igf115.utilidades.HibernateUtils;
 @Repository
 public class AsInterfaceDao {
 	
+	@Autowired
 	private HibernateUtils hibernateUtil;
 	
 	
 	@Autowired
 	public AsInterfaceDao(HibernateUtils hibernateUtil) {
-		super();
 		this.hibernateUtil = hibernateUtil;
 	}
 

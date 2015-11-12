@@ -37,16 +37,16 @@ public class AsMetodoController extends HttpServlet {
 	private TbTipoMetodoDao tbTipoMetodoDao;
 	private AsMetodoPKDao asMetodoPKDao;
 	
-//	public AsMetodoController() {
-//		this.dao = dao;
-//		asClaseDao = new AsClaseDao();
-//		tbTipoMetodoDao= new TbTipoMetodoDao();
-//		asMetodoPKDao = new AsMetodoPKDao();
-//		
-//	}
+
+	
 	@Autowired
-	public AsMetodoController(AsMetodoDao dao) {
+	public AsMetodoController(AsMetodoDao dao, AsClaseDao asClaseDao,
+			TbTipoMetodoDao tbTipoMetodoDao, AsMetodoPKDao asMetodoPKDao) {
+
 		this.dao = dao;
+		this.asClaseDao = asClaseDao;
+		this.tbTipoMetodoDao = tbTipoMetodoDao;
+		this.asMetodoPKDao = asMetodoPKDao;
 	}
 
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
