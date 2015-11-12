@@ -54,7 +54,7 @@ public class AsMetodoController {
 	}
 	
 	
-	public TbTipoMetodo daTbTipoMetodoEntidad(Integer id) {
+	public TbTipoMetodo daTbTipoMetodoEntidad(String id) {
 		return tbTipoMetodoDao.findByIdTbTipoMetodo(id);
 	}
 	

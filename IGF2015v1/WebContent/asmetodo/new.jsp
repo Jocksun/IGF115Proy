@@ -23,7 +23,7 @@ String mensaje;
 			
 		AsClase asclase=asMetodoController.daAsClaseEntidad(Integer.parseInt(request.getParameter("clase")));
 		asMetodo.setAsClase(asclase);
-		TbTipoMetodo tbTipoMetodo=asMetodoController.daTbTipoMetodoEntidad(Integer.parseInt(request.getParameter("tipoMetodo")));
+		TbTipoMetodo tbTipoMetodo=asMetodoController.daTbTipoMetodoEntidad(request.getParameter("tipoMetodo"));
 		asMetodo.setCTipoMetodo(tbTipoMetodo);
 		AsMetodoPK asMet= asMetodoController.daAsMetodoPK(Integer.parseInt(request.getParameter("codigoMetodo")),Integer.parseInt(request.getParameter("clase")));
 		asMetodo.setAsMetodoPK(asMet);
