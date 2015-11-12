@@ -33,7 +33,7 @@ List<AsInterfaceImplementa> list= AsInterImplementsCtrol.daAsInterfaceImplementa
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>AsInterface</title>
+<title>AsInterfaceImplementa</title>
 </head>
 <body>
 <center><h2>AS_INTERFACE_IMPLEMENTA</h2></center>
@@ -45,8 +45,8 @@ List<AsInterfaceImplementa> list= AsInterImplementsCtrol.daAsInterfaceImplementa
 				<thead>
 					<tr>
 						<th>Código</th>
-                        <th>Descripción</th>
-                        <th>Usuario</th>
+                        <th>Padre</th>
+                        <th>Hijo</th>
                         <th>Modificar</th>
                         <th>Eliminar</th>
 					</tr>
@@ -55,8 +55,8 @@ List<AsInterfaceImplementa> list= AsInterImplementsCtrol.daAsInterfaceImplementa
 					<c:forEach items="<%=list%>" var="AsInterfaceImplementa">
 						<tr>
 						    <td><c:out value="${AsInterfaceImplementa.CInterfaceImplementa}" /></td>
-                    		<td><c:out value="${AsInterfaceImplementa.CInterfaceHijo.c_interface}" /></td>
-                    		<td><c:out value="${AsInterfaceImplementa.CInterfacePadre.c_interface}" /></td>
+                    		<td><c:out value="${AsInterfaceImplementa.CInterfaceHijo}" /></td>
+                    		<td><c:out value="${AsInterfaceImplementa.CInterfacePadre}" /></td>
                     
                     		<td><a href="editAsInterfaceImplementa.jsp?userId=<c:out value="${AsInterfaceImplementa.CInterfaceImplementa}"/>">Modificar</a></td>      
                     		<td><a href="deleteAsInterfaceImplementa.jsp?userId=<c:out value="${AsInterfaceImplementa.CInterfaceImplementa}"/>">Eliminar</a></td>

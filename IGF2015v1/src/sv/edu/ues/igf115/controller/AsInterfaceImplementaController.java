@@ -26,11 +26,16 @@ public class AsInterfaceImplementaController extends HttpServlet{
 		this.daoAsInterImplemCont = daoAsInterImplemCont;
 	}
 	
-	public boolean crearAsInterfaceImplementa(Integer cInterfaceImplementa, AsInterface cInterfacePadre, AsInterface cInterfaceHijo) {
+	public boolean crearAsInterfaceImplementa(Integer cInterfaceImplementa, int cInterfacePadre, int cInterfaceHijo) {
 		try {
 
 			if (daoAsInterImplemCont.daAsInterfaceImplementaByNombre(cInterfaceImplementa) == null) {
-				AsInterfaceImplementa asInterfaceImplementa = new AsInterfaceImplementa(cInterfaceImplementa, cInterfacePadre, cInterfaceHijo);
+				
+				AsInterfaceImplementa asInterfaceImplementa = new AsInterfaceImplementa();
+				asInterfaceImplementa.setCInterfaceImplementa(cInterfaceImplementa);
+				asInterfaceImplementa.setCInterfaceHijo(cInterfaceHijo);
+				asInterfaceImplementa.setCInterfacePadre(cInterfacePadre);
+				
 				daoAsInterImplemCont.guardaActualiza(asInterfaceImplementa);
 				return true;
 			} else
@@ -41,7 +46,7 @@ public class AsInterfaceImplementaController extends HttpServlet{
 		return false;
 	}
 	
-	public boolean eliminar(AsInterface asInterface) {
+	public boolean eliminar(AsInterfaceImplementa asInterfaceImplementa) {
 
 		try {
 			daoAsInterImplemCont.eliminar(asInterfaceImplementa);
