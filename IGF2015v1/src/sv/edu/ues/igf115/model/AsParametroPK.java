@@ -9,18 +9,25 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Embeddable
 public class AsParametroPK implements Serializable {
+	
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @Column(name = "c_parametro", nullable = false)
+    private int cParametro;
+	@Basic(optional = false)
     @Column(name = "c_clase", nullable = false)
     private int cClase;
     @Basic(optional = false)
     @Column(name = "c_metodo", nullable = false)
     private int cMetodo;
-    @Basic(optional = false)
-    @Column(name = "c_parametro", nullable = false)
-    private int cParametro;
+    
+    
 
     public AsParametroPK() {
     }

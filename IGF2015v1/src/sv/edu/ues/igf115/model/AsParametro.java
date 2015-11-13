@@ -7,12 +7,16 @@ package sv.edu.ues.igf115.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,12 +39,21 @@ public class AsParametro implements Serializable {
     @Column(name = "f_ingreso")
     @Temporal(TemporalType.DATE)
     private Date fIngreso;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumns({
+    	@JoinColumn(name="c_clase"),
+    	@JoinColumn(name="c_metodo"),
+    	@JoinColumn(name="c_parametro"),
+    })
+    private Set<AsObservacion> asObservacionSet;
+    //COMENTAR PARA QUITAR LAS LLAVES FORANEAS DESDE AQUI
+    
     @JoinColumns({
         @JoinColumn(name = "c_clase", referencedColumnName = "c_clase", nullable = false, insertable = false, updatable = false),
         @JoinColumn(name = "c_metodo", referencedColumnName = "c_metodo", nullable = false, insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private AsMetodo asMetodo;
-
+    //HASTA AQUI
     public AsParametro() {
     }
 
@@ -92,14 +105,21 @@ public class AsParametro implements Serializable {
         this.fIngreso = fIngreso;
     }
 
+    public Set<AsObservacion> getAsObservacionSet() {
+        return asObservacionSet;
+    }
+
+    public void setAsObservacionSet(Set<AsObservacion> asObservacionSet) {
+        this.asObservacionSet = asObservacionSet;
+    }
+    //COMENTAR PARA QUITAR LAS LLAVES FORANEAS DESDE AQUI
+    
     public AsMetodo getAsMetodo() {
         return asMetodo;
     }
 
     public void setAsMetodo(AsMetodo asMetodo) {
         this.asMetodo = asMetodo;
-    }
-
-  
+    }//HASTA AQUI
     
 }

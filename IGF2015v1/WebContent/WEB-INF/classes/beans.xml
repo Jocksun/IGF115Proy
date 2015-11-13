@@ -95,7 +95,32 @@ http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	<bean id="ctrlApli" class="sv.edu.ues.igf115.controller.TbAplicativoController">
 		<constructor-arg ref="daoApli" />
 	</bean>
+	<!-- ============================================ -->
+	<!-- BEANS PARA TABLA OBSERVACION Y PARAMETROS -->
+	<bean id="AsObservacionDao" class="sv.edu.ues.igf115.dao.AsObservacionDao">
+		<constructor-arg ref="hibernateUtil" />
+	</bean>
 	
+	<bean id="AsObservacionController" class="sv.edu.ues.igf115.controller.AsObservacionController">
+		<constructor-arg ref="AsObservacionDao" />
+	</bean>
+	
+	<bean id="AsParametroDao" class="sv.edu.ues.igf115.dao.AsParametroDao">
+		<constructor-arg ref="hibernateUtil" />
+	</bean>
+	
+	<bean id="AsParametroController" class="sv.edu.ues.igf115.controller.AsParametroController">
+		<constructor-arg ref="AsParametroDao" />
+		<constructor-arg ref="AsParametroPKDao" />
+	</bean>
+	<bean id="AsParametroPKDao" class="sv.edu.ues.igf115.dao.AsParametroPKDao">
+		<constructor-arg ref="hibernateUtil" />
+	</bean>
+	
+	<bean id="AsParametroPKController" class="sv.edu.ues.igf115.controller.AsParametroPKController">
+		<constructor-arg ref="AsParametroPKDao" />
+	</bean>
+	<!-- ============================================== -->
 <!-- 	<bean id="AsClaseInterfaceDao" class="sv.edu.ues.igf115.dao.AsClaseInterfaceDao"> -->
 <!-- 		<constructor-arg ref="hibernateUtil" /> -->
 <!-- 	</bean> -->
