@@ -14,7 +14,7 @@ TbTipoMetodoController tbTipoMetodoController=(TbTipoMetodoController) context.g
 
 String crear = request.getParameter("crear");
 
-String mensaje;
+String mensaje="";
 TbTipoMetodo tbTipoMetodo= new TbTipoMetodo();	
 String id="";
 String isd= "";
@@ -26,13 +26,14 @@ String isd= "";
 		tbTipoMetodo=tbTipoMetodoController.daTbTipoMetodoById(id);		
 		tbTipoMetodo.setDTipoMetodo(request.getParameter("dtipometodo"));
 		
-		boolean existe = tbTipoMetodoController.crear(tbTipoMetodo);
+		boolean existe = tbTipoMetodoController.update(tbTipoMetodo);
 		if (existe) {
 			response.sendRedirect("tbtipometodo.jsp");
 			mensaje = "Se creo el  departamento";
 		} else {
-			response.sendRedirect("new.jsp");
+			response.sendRedirect("tbtipometodo.jsp");
 			mensaje = "Error al guardar el TbTipoAtributo";
+			request.setAttribute("mensaje",mensaje);
 		}
 	}else{
 		isd = request.getParameter("userId");
@@ -55,6 +56,8 @@ String isd= "";
 </head>
 <body>
 	<div class="container">
+	    <h1>Editar Tipo Metodo</h1>
+	    <c:out value="${mensaje}"></c:out>
 		<form method="POST" action='edit.jsp'
 			name="frmAddAtributo" role="form">
 

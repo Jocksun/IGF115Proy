@@ -56,6 +56,7 @@ String descripcion="";
 </head>
 <body>
 	<div class="container">
+	<h1>Editar  TbTipoAtributo</h1>
 		<form method="POST" action='edit.jsp'
 			name="frmAddAtributo" role="form">
 

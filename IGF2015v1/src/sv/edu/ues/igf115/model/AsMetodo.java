@@ -8,10 +8,13 @@ package sv.edu.ues.igf115.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -26,8 +29,17 @@ import javax.persistence.TemporalType;
 
 public class AsMetodo implements Serializable {
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected AsMetodoPK asMetodoPK;
+   
+    
+    @Id
+    @Basic(optional = false)
+    @Column(name = "c_metodo", nullable = false)
+    private int cMetodo;
+    
+    @Basic(optional = false)
+    @Column(name = "c_clase", nullable = false)
+    private int cClase;
+    
     @Column(name = "d_metodo", length = 50)
     private String dMetodo;
     @Column(name = "d_tipo_retorno", length = 50)
@@ -53,23 +65,33 @@ public class AsMetodo implements Serializable {
     public AsMetodo() {
     }
 
-    public AsMetodo(AsMetodoPK asMetodoPK) {
-        this.asMetodoPK = asMetodoPK;
-    }
+   
 
-    public AsMetodo(int cClase, int cMetodo) {
-        this.asMetodoPK = new AsMetodoPK(cClase, cMetodo);
-    }
+    public int getcClase() {
+		return cClase;
+	}
 
-    public AsMetodoPK getAsMetodoPK() {
-        return asMetodoPK;
-    }
 
-    public void setAsMetodoPK(AsMetodoPK asMetodoPK) {
-        this.asMetodoPK = asMetodoPK;
-    }
 
-    public String getDMetodo() {
+	public void setcClase(int cClase) {
+		this.cClase = cClase;
+	}
+
+
+
+	public int getcMetodo() {
+		return cMetodo;
+	}
+
+
+
+	public void setcMetodo(int cMetodo) {
+		this.cMetodo = cMetodo;
+	}
+
+
+
+	public String getDMetodo() {
         return dMetodo;
     }
 

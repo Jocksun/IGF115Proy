@@ -42,6 +42,7 @@ List<AsAtributo> list= asAtributoController.daAsAtributo();
 	<div class="wrap">
 		<section>
 		<div class="container">
+		<h1>Listado  ASAtributo</h1>
 			<table class="table table-hover">
 
 				<thead>

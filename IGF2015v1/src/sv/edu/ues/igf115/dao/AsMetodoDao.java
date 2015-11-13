@@ -56,7 +56,19 @@ public class AsMetodoDao {
 			}
 		}
 
-
+		public void update(AsMetodo asMetodo) {
+			try {
+				iniciaOperacion();
+				sesion.update(asMetodo);
+				tx.commit();
+				sesion.flush();
+			} catch (HibernateException he) {
+				manejaExcepcion(he);
+				throw he;
+			} finally {
+				sesion.close();
+			}
+		}
 			
 		public void eliminar(AsMetodo asMetodo) {
 			try {
@@ -72,10 +84,10 @@ public class AsMetodoDao {
 			}
 		}
 		
-		public AsMetodo daDepartamentoById(short idDep){
+		public AsMetodo daDepartamentoById(Integer idDep){
 			 sesion = sessionFactory.openSession() ;
 			 // Retorna la instancia persistente de la clase por medio del	atributo identidad
-			 AsMetodo id = (AsMetodo) sesion.get(AsMetodo.class, new Short(idDep)) ;
+			 AsMetodo id = (AsMetodo) sesion.get(AsMetodo.class, new Integer(idDep)) ;
 			 sesion.close() ;
 			 return id ;
 			}

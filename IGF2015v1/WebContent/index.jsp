@@ -4,7 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" type="text/css" href="style.css" media="screen,projection" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<link rel="stylesheet" type="text/css" href="style.css"  />
 	<title>UES-IGF115-2015</title>
 </head>
 <body>
@@ -13,44 +15,44 @@
 		<p class="hide">
 			skip to: <a href="#">content</a> | <a href="#">navigation</a><br />
 		</p>
-		<h1><a href="#">IGF115</a></h1>
+		<h1><a href="#">IGF115 GRUPO 8</a></h1>
 		<p id="slogan">UES-2015</p>
 	</div><div class="inner_copy"></div>
-	<div id="sitemenu">
-		<h2 class="hide">Sample menu:</h2>
+	<div id="sitemenu">		
 		<ul>
 			<li><a class="current" href="#" onclick="javascript:anchodiv();">Inicio</a></li>
 			<li>
 				<a href="#">Catalogos</a>
 				<ul>
-					<li><a href="/Clave1Grupo9/Cliente/listaTipoCliente.jsp">Tipo de Cliente</a></li>
-					<li><a href="/Clave1Grupo9/Establecimiento/CreaEst.html">Establecimiento</a></li>
-					<li><a href="/Clave1Grupo9/Pais/Creapais.html">Pais</a></li>
-					<li><a href="/Clave1Grupo9/Concepto/Lista.jsp">Concepto</a></li>
+					<li><a href="/IGF2015v1/Cliente/listaTipoCliente.jsp">Tipo de Cliente</a></li>
+					<li><a href="/IGF2015v1/Establecimiento/CreaEst.html">Establecimiento</a></li>
+					<li><a href="/IGF2015v1/Pais/Creapais.html">Pais</a></li>
+					<li><a href="/IGF2015v1/Concepto/Lista.jsp">Concepto</a></li>
 				</ul>
 			</li>
 			<li>
-				<a href="#">Maestros</a>
+				<a href="#">TbTipoAtributo</a>
 				<ul>
-					<li><a href="/Clave1Grupo9/Cliente/listaCliente.jsp">Cliente</a></li>
-					<li><a href="/Clave1Grupo9/TarjetaCredito/creartarjeta.html">Tarjeta de Credito</a></li>
-					<li><a href="/Clave1Grupo9/TarjetaCredito/consultartarjeta.html">consultar</a></li>
-					<li><a href="/Clave1Grupo9/TarjetaCredito/eliminartarjeta.html">eliminar</a></li>
-					<li><a href="/Clave1Grupo9/TarjetaCredito/modificatargeta.html">modificar</a></li>
+					<li><a href="/IGF2015v1/tipoatributo/atributos.jsp">ListadoTbTipoAtributo</a></li>					
+				</ul>
+			</li>
+			
+			<li>
+				<a href="#">AsAtributo</a>
+				<ul>
+					<li><a href="/IGF2015v1/asatributo/asatributo.jsp">ListadoAsAtributo</a></li>
 				</ul>
 			</li>
 			<li>
-				<a href="#">Procesos</a>
+				<a href="#">TbTipoMetodo</a>
 				<ul>
-					<li><a href="#">Tarjeta-Cliente</a></li>
-					<li><a href="/Clave1Grupo9/Transaccion/Lista.jsp">Transaccion</a></li>
-					<li><a href="#">Estado de Cuenta</a></li>
+					<li><a href="/IGF2015v1/tbtipometodo/tbtipometodo.jsp">ListadoAsAtributo</a></li>
 				</ul>
 			</li>
 			<li>
-				<a href="#">Administracion</a>
+				<a href="#">AsMetodo</a>
 				<ul>
-					<li><a href="/Clave1Grupo9/Administracion/Usuarios/Lista.jsp">Usuarios</a></li>
+					<li><a href="/IGF2015v1/asmetodo/asmetodo.jsp">ListadoAsAtributo</a></li>
 				</ul>
 			</li>
 			<li><a href="j_spring_security_logout">Cerrar sesión</a></li>
@@ -58,13 +60,14 @@
 	</div>
 	<div id="content">
 	</div>
-	<div id="footer">
-		<div class="fcenter">
-			<div class="fleft"><p>IGF115</p></div>
-			<div class="fright"><p>Clave</p></div>
-			<div class="fcenter"><p>Grupo</p></div>
-		</div>
-	</div>
+
+<div id="footer">
+	<p id="legal"> &copy;2015 IGF-115 . All Rights Reserved.
+		&nbsp;&nbsp;&bull;
+		Design by <a href="http://templated.co" rel="nofollow">Grupo 8</a> </p>
+	<!-- end footer -->
+</div>
+	
 </div>
 </body>
 </html>

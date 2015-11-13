@@ -43,6 +43,7 @@ List<TbTipoAtributo> list= tbTipoAtributoController.daTbTipoAtributos();
 	<div class="wrap">
 		<section>
 		<div class="container">
+		<h1>Listado  TbTipoAtributo</h1>
 			<table class="table table-hover">
 
 				<thead>

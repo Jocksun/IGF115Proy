@@ -27,9 +27,11 @@ String mensaje;
 		if (existe) {
 			response.sendRedirect("tbtipometodo.jsp");
 			mensaje = "Se creo el  departamento";
+			request.setAttribute("mensaje",mensaje);
 		} else {
 			response.sendRedirect("new.jsp");
 			mensaje = "Error al guardar el TbTipoAtributo";
+			request.setAttribute("mensaje",mensaje);
 		}
 	} 
 %>
@@ -49,6 +51,8 @@ String mensaje;
 </head>
 <body>
 	<div class="container">
+	<h1>Nuevo Tipo Metodo</h1>
+	    <c:out value="${mensaje}"></c:out>
 		<form method="POST" action='new.jsp'
 			name="frmAddAtributo" role="form">
 

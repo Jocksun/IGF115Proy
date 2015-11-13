@@ -73,32 +73,54 @@ public class TbTipoMetodoDao {
 				sesion.close();
 			}
 		}
-		
-		public TbTipoMetodo daDepartamentoById(short idDep){
-			 sesion = sessionFactory.openSession() ;
-			 // Retorna la instancia persistente de la clase por medio del	atributo identidad
-			 TbTipoMetodo id = (TbTipoMetodo) sesion.get(TbTipoMetodo.class, new Short(idDep)) ;
-			 sesion.close() ;
-			 return id ;
-			}
-		
-		public List<TbTipoMetodo> findByAll() {
+
+	public TbTipoMetodo daDepartamentoById(short idDep) {
+		try {
 			sesion = sessionFactory.openSession();
-			//Query query = sesion.getNamedQuery("Departamentos.findAll");
+			// Retorna la instancia persistente de la clase por medio del
+			// atributo identidad
+			TbTipoMetodo id = (TbTipoMetodo) sesion.get(TbTipoMetodo.class,
+					new Short(idDep));
+			return id;
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		} finally {
+			sesion.close();
+		}
+	}
+		
+	public List<TbTipoMetodo> findByAll() {
+		try {
+			sesion = sessionFactory.openSession();
+			// Query query = sesion.getNamedQuery("Departamentos.findAll");
 			Query query = sesion.createQuery("Select u From TbTipoMetodo u");
 			List<TbTipoMetodo> tbTipoMetodo = query.list();
-			sesion.close();
 			return tbTipoMetodo;
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		} finally {
+			sesion.close();
 		}
-
-		public TbTipoMetodo findByIdTbTipoMetodo(String nombre) {
+	}
+		
+	public TbTipoMetodo findByIdTbTipoMetodo(String nombre) {
+		try {
 			sesion = sessionFactory.openSession();
-//			Query query = sesion.getNamedQuery("Departamentos.findByNombreDep");
-//			query.setParameter("nombreDep", nombre);
-			Query query = sesion.createQuery("Select u from TbTipoMetodo u where u.cTipoMetodo =:idTipo");
+			// Query query =
+			// sesion.getNamedQuery("Departamentos.findByNombreDep");
+			// query.setParameter("nombreDep", nombre);
+			Query query = sesion
+					.createQuery("Select u from TbTipoMetodo u where u.cTipoMetodo =:idTipo");
 			query.setParameter("idTipo", nombre);
 			TbTipoMetodo tbTipoMetodo = (TbTipoMetodo) query.uniqueResult();
-			sesion.close();
 			return tbTipoMetodo;
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		} finally {
+			sesion.close();
 		}
+	}
 }

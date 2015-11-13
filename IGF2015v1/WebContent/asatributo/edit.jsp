@@ -61,6 +61,7 @@ String mensaje;
 </head>
 <body>
 	<div class="container">
+	<h1>Editar  ASAtributo</h1>
 		<form method="POST" action='edit.jsp'
 			name="frmAddAsAtributo" role="form">
 

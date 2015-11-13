@@ -65,6 +65,7 @@ Integer isd=null;
 </head>
 <body>
 	<div class="container">
+	 <h1>Eliminar  ASAtributo</h1>
 		<form method="POST" action='delete.jsp' name="frmAddAtributo"
 			role="form">
 

@@ -42,6 +42,7 @@ request.setAttribute("lst", tbTipoMetodoController.daTbTipoMetodo());
 	<div class="wrap">
 		<section>
 		<div class="container">
+		<h1>Listado  TBTipoMetodo</h1>
 			<table class="table table-hover">
 
 				<thead>

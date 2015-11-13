@@ -46,6 +46,7 @@ String mensaje;
 </head>
 <body>
 	<div class="container">
+	 <h1>Nuevo  TbTipoAtributo</h1>
 		<form method="POST" action='new.jsp'
 			name="frmAddAtributo" role="form">
 

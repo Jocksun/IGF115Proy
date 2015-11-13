@@ -13,31 +13,32 @@ AsMetodoController asMetodoController=(AsMetodoController) context.getBean("AsMe
 
 String crear = request.getParameter("crear");
 
-String mensaje;
+String mensaje="";
+AsMetodo asMetodo = new AsMetodo();
+Integer id=null;
+Integer isd= null;
 
 	if (crear != null && "on".equals(crear)) {
 		
-
-		
-		AsMetodo asMetodo = new AsMetodo();
-			
+		//traer entidades	
 		AsClase asclase=asMetodoController.daAsClaseEntidad(Integer.parseInt(request.getParameter("clase")));
-		asMetodo.setAsClase(asclase);
 		TbTipoMetodo tbTipoMetodo=asMetodoController.daTbTipoMetodoEntidad(request.getParameter("tipoMetodo"));
+		
 		asMetodo.setCTipoMetodo(tbTipoMetodo);
-		asMetodo.setBActivo(new Integer(1));//1 ACtivo
+		asMetodo.setAsClase(asclase);
+		asMetodo.setBActivo(Integer.parseInt(request.getParameter("activo")));//1 ACtivo
 		asMetodo.setCUsuario(request.getParameter("usuario"));
 		asMetodo.setDMetodo(request.getParameter("descripcionMetodo"));
 		asMetodo.setDTipoRetorno(request.getParameter("descripcionTRetorno"));
 		asMetodo.setFIngreso(new Date());
 		asMetodo.setNParametros(Integer.parseInt(request.getParameter("parametro")));
 		
-		boolean existe = asMetodoController.crear(asMetodo);
+		boolean existe = asMetodoController.update(asMetodo);
 		if (existe) {
 			response.sendRedirect("asmetodo.jsp");
 			mensaje = "Se creo el  departamento";
 		} else {
-			response.sendRedirect("new.jsp");
+			response.sendRedirect("asmetodo.jsp");
 			mensaje = "Error al guardar el TbTipoAtributo";
 		}
 	} 
@@ -47,6 +48,9 @@ String mensaje;
 		request.setAttribute("lstAsClase", lstAsClase);
  		List<TbTipoMetodo> lstTbTipoMetodo= asMetodoController.daTipoMetodo();
 		request.setAttribute("lstTbTipoMetodo", lstTbTipoMetodo);
+		
+		isd =Integer.parseInt(request.getParameter("userId"));
+		request.setAttribute("AsMetodo", asMetodoController.daAsMetodoId(isd));
 		
 	}
 %>
@@ -66,10 +70,19 @@ String mensaje;
 </head>
 <body>
 	<div class="container">
-	<h1>Nuevo  ASMetodo</h1>
-		<form method="POST" action='new.jsp'
+	<h1>Actualizar  ASMetodo</h1>
+		<form method="POST" action='update.jsp'
 			name="frmAddAtributo" role="form">
 
+			
+			<div class="form-group">
+				<label for="codigoMetodo"> Codigo Metodo: <input
+					class="form-control" type="number" id="codigoMetodo" name="codigoMetodo" disabled="disabled"
+					value=<c:out value="${AsMetodo.cMetodo}" /> />
+				</label>
+			</div>
+			
+			
 			<div class="form-group">
 				<label for="clase"> Codigo Clase: <select name='clase'>
 						<option value="${AsMetodo.cClase}" selected>${AsMetodo.cClase}</option>
@@ -80,14 +93,6 @@ String mensaje;
 				</label>
 			</div>
 
-			<div class="form-group">
-				<label for="codigoMetodo"> Codigo Metodo: <input
-					class="form-control" type="number" id="codigoMetodo" name="codigoMetodo"
-					value=<c:out value="${AsMetodo.asMetodoPK.CMetodo}" /> />
-				</label>
-			</div>
-
-			
 			<div class="form-group">
 				<label for="descripcionMetodo"> Descripcion  Metodo:<input
 					class="form-control" type="text" id="descripcionMetodo"
@@ -112,7 +117,13 @@ String mensaje;
 				</label>
 			</div>
 
-			
+			<div class="form-group">
+				<label for="activo"> Activo:<input
+					class="form-control" type="number" id="activo"
+					name="activo" 
+					value="<c:out value="${AsMetodo.BActivo}" />" />
+				</label>
+			</div>
 			
 			<div class="form-group">
 				<label for="parametro"> Numero Parametros:<input class="form-control"
@@ -132,8 +143,6 @@ String mensaje;
 				</label>
 			</div>
 			
-
-
 				<input type="hidden" name="crear" value="on"/>
 			 	<input type="submit" value="Agregar"/>
 		</form>

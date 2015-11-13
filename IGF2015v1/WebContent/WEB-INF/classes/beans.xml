@@ -53,7 +53,6 @@ http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	<bean id="AsMetodoController" class="sv.edu.ues.igf115.controller.AsMetodoController">
 		<constructor-arg ref="AsMetodoDao" />
 		<constructor-arg ref="AsClaseDao" />
-		<constructor-arg ref="AsMetodoPKDao" />
 		<constructor-arg ref="TbTipoMetodoDao" />
 	</bean>
 	

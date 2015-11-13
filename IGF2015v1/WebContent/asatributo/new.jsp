@@ -62,6 +62,7 @@ String mensaje;
 </head>
 <body>
 	<div class="container">
+	   <h1>Nuevo  ASAtributo</h1>
 		<form method="POST" action='new.jsp'
 			name="frmAddAsAtributo" role="form">
 
@@ -87,7 +88,7 @@ String mensaje;
 					name='metodoid'>
 						<option value="${AsAtributo.CMetodo}" selected>${AsAtributo.CMetodo}</option>
 						<c:forEach items="${lstMetodo}" var="met">
-							<option value="${met.asMetodoPK.CMetodo}">${met.asMetodoPK.CMetodo}</option>
+							<option value="${met.cMetodo}">${met.cMetodo}</option>
 						</c:forEach>
 				</select>
 				</label>

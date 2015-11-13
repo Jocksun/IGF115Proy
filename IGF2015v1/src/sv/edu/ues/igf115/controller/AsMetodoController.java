@@ -24,17 +24,15 @@ public class AsMetodoController {
 	private AsClaseDao asClaseDao;
 	@Autowired
 	private TbTipoMetodoDao tbTipoMetodoDao;
-	@Autowired
-	private AsMetodoPKDao asMetodoPKDao;
+	
 	
 
 	@Autowired
 	public AsMetodoController(AsMetodoDao dao, AsClaseDao asClaseDao,
-			TbTipoMetodoDao tbTipoMetodoDao, AsMetodoPKDao asMetodoPKDao) {
+			TbTipoMetodoDao tbTipoMetodoDao) {
 		this.dao = dao;
 		this.asClaseDao = asClaseDao;
 		this.tbTipoMetodoDao = tbTipoMetodoDao;
-		this.asMetodoPKDao = asMetodoPKDao;
 	}
 
 	
@@ -63,21 +61,32 @@ public class AsMetodoController {
 	}
 	
 	
-	public AsMetodoPK daAsMetodoPK(Integer clase,Integer metodo){
-		
-		AsMetodoPK asMetodoPK= new AsMetodoPK();
-		asMetodoPK.setCClase(clase);
-		asMetodoPK.setCMetodo(metodo);
-		
-		AsMetodoPK asMe=asMetodoPKDao.daAsMetodoPK(asMetodoPK);
-		return asMe;		
+//	public AsMetodoPK daAsMetodoPK(Integer clase,Integer metodo){
+//		
+//		AsMetodoPK asMetodoPK= new AsMetodoPK();
+//		asMetodoPK.setCClase(clase);
+//		asMetodoPK.setCMetodo(metodo);
+//		
+//		AsMetodoPK asMe=asMetodoPKDao.daAsMetodoPK(asMetodoPK);
+//		return asMe;		
+//	}
+	
+	
+	public boolean update(AsMetodo asMetodo) {
+		try {
+			dao.update(asMetodo);
+			return true;
+		} catch (Exception e) {
+			System.out.println("Error  AsMetodoController Update");
+		}
+		return false;
 	}
 	
 	
 	
 	public boolean crear(AsMetodo asMetodo) {
 		try {
-			if (dao.findByIdAsMetodo(asMetodo.getAsMetodoPK().getCMetodo()) == null) {							
+			if (dao.daDepartamentoById(asMetodo.getcMetodo()) == null) {							
 				dao.guardar(asMetodo);
 				return true;
 			} else
@@ -86,6 +95,22 @@ public class AsMetodoController {
 			System.out.println("error crear AsMetodoController "+e );
 		}
 		return false;
+	}
+	
+	  public AsMetodo daAsMetodoId(Integer id){
+			return dao.daDepartamentoById(id);
+		}
+	
+	public boolean eliminar(AsMetodo asMetodo) {
+
+		try {
+			dao.eliminar(asMetodo);
+			return true;
+		} catch (Exception e) {
+			System.out.println("error crear TbTipoMetodoController " + e);
+			return false;
+		}
+
 	}
 	
 	

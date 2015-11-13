@@ -40,8 +40,10 @@ request.setAttribute("lst", asMetodoController.daAsMetodo());
 </head>
 <body>
 	<div class="wrap">
+	
 		<section>
 		<div class="container">
+		<h1>Listado  ASMetodo</h1>
 			<table class="table table-hover">
 
 				<thead>
@@ -61,8 +63,8 @@ request.setAttribute("lst", asMetodoController.daAsMetodo());
 				<tbody>
 					<c:forEach items="${lst}" var="user">
 						<tr>
-							<td><c:out value="${user.asMetodoPK.CClase}" /></td>
-							<td><c:out value="${user.asMetodoPK.CMetodo}" /></td>
+							<td><c:out value="${user.cClase}" /></td>
+							<td><c:out value="${user.cMetodo}" /></td>
 							<td><c:out value="${user.DMetodo}" /></td>
 							<td><c:out value="${user.DTipoRetorno}" /></td>
 							<td><c:out value="${user.CUsuario}" /></td>
@@ -73,10 +75,10 @@ request.setAttribute("lst", asMetodoController.daAsMetodo());
 						    <td><c:out value="${user.CTipoMetodo.CTipoMetodo}" /></td>
 						   
 							<td><a
-							    href="edit.jsp?userId=<c:out value="${user.asMetodoPK.CMetodo}"/>">Update</a></td>
+							    href="update.jsp?userId=<c:out value="${user.cMetodo}"/>">Update</a></td>
 							
 							<td><a
-								href="delete.jsp?userId=<c:out value="${user.asMetodoPK.CMetodo}"/>">Delete</a></td>
+								href="delete.jsp?userId=<c:out value="${user.cMetodo}"/>">Delete</a></td>
 						
 						</tr>
 					</c:forEach>

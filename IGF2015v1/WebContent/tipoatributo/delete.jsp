@@ -67,6 +67,7 @@ String descripcion="";
 </head>
 <body>
 	<div class="container">
+	<h1>Eliminar  TbTipoAtributo</h1>
 		<form method="POST" action='delete.jsp' name="frmAddAtributo"
 			role="form">
 
