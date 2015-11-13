@@ -53,8 +53,11 @@ String mensaje = "";
 <link href="Resource/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-<%=mensaje %>
+
 	<div class="container">
+	<div class="page-header">
+  			<h1>Nuevo Parámetro</h1>
+		</div>
 		<form method="POST" action='new.jsp'
 			name="frmAddObservacion" role="form">
 

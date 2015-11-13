@@ -43,6 +43,9 @@ List<AsParametro> list= asParametroController.daAsParametro();
 	<div class="wrap">
 		<section>
 		<div class="container">
+		<div class="page-header">
+  			<h1>Parámetros</h1>
+		</div>
 			<table class="table table-hover">
 
 				<thead>

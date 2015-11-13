@@ -42,6 +42,9 @@ List<AsObservacion> list= asObservacionController.daAsObservaciones();
 	<div class="wrap">
 		<section>
 		<div class="container">
+		<div class="page-header">
+  			<h1>Observaciones</h1>
+		</div>
 			<table class="table table-hover">
 
 				<thead>

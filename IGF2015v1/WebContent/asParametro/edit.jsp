@@ -26,6 +26,7 @@ String descripcion="";
 		id = Integer.parseInt(request.getParameter("codigo"));		
 		asParametro = asParametroController.daAsParametro(id);
 		asParametro.setDParametro(request.getParameter("descripcion"));
+		asParametro.setDTipoParametro(request.getParameter("dTipoParametro"));
 		asParametro.setCUsuario(request.getParameter("usuario"));
 		boolean existe = asParametroController.update(asParametro);
 		if (existe) {
@@ -47,7 +48,7 @@ String descripcion="";
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Editar Observacion</title>
+<title>Editar Parámetro</title>
 <link
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -58,6 +59,9 @@ String descripcion="";
 </head>
 <body>
 	<div class="container">
+	<div class="page-header">
+  			<h1>Editar Parámetro</h1>
+		</div>
 		<form method="POST" action='edit.jsp'
 			name="frmAddAtributo" role="form">
 
@@ -71,6 +75,12 @@ String descripcion="";
 				<label for="name"> Descripcion :<input
 					class="form-control" type="text" id="descripcion"
 					name="descripcion" value="<c:out value="<%=asParametro.getDParametro()%>" />" />
+				</label>
+			</div>
+			<div class="form-group">
+				<label for="dTipoParametro"> Tipo de Parametro:<input
+					class="form-control" type="text" id="dTipoParametro"
+					name="dTipoParametro" value="<c:out value="<%=asParametro.getDTipoParametro()%>" />" />
 				</label>
 			</div>
 			<div class="form-group">

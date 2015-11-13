@@ -59,6 +59,9 @@ String descripcion="";
 </head>
 <body>
 	<div class="container">
+	<div class="page-header">
+  			<h1>Editar Observación</h1>
+		</div>
 		<form method="POST" action='edit.jsp'
 			name="frmAddAtributo" role="form">
 

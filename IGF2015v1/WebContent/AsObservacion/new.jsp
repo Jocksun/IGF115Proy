@@ -53,6 +53,9 @@ String mensaje;
 </head>
 <body>
 	<div class="container">
+	<div class="page-header">
+  			<h1>Crear Observacion</h1>
+		</div>
 		<form method="POST" action='new.jsp'
 			name="frmAddObservacion" role="form">
 

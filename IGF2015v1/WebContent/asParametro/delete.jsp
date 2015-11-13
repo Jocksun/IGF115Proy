@@ -69,6 +69,9 @@ String fecha = "";
 </head>
 <body>
 	<div class="container">
+	<div class="page-header">
+  			<h1>Eliminar Parámetro</h1>
+		</div>
 		<form method="POST" action='delete.jsp' name="frmDelObservacion"
 			role="form">
 
